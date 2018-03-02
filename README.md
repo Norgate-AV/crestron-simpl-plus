@@ -25,6 +25,8 @@ This extension contributes the following commands:
 This extension contributes the following settings:
 
 * `simpl.compiler`: sets the path of the Simpl+ compiler. Can be set to a custom path via the user settings. Please use the double \ to specify directory paths.
+* `simpl.helpLocation`: sets the path of the SIMPL+ reference guide. Can be set to a custom path via the user settings. Please use the double \ to specify directory paths.
+* `simpl.terminalLocation`: sets path of the default windows cmd.exe. Can be set to a custom path via the user settings. Please use the double \ to specify directory paths. 
 
 ## Keybindings and Menus
 All commands are added to the right click context menu of the editor tab, and the following keybindings have been added.
