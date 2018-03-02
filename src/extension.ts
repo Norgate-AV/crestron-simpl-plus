@@ -24,7 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     let series3_compileAll = vscode.commands.registerCommand("extension.simplCC_Series3All", () => {
         let foundFiles = vscode.workspace.findFiles('*.usp');
-        let term = vscode.window.createTerminal('simplCC');
+        let term = vscode.window.createTerminal('simplCC', vscode.workspace.getConfiguration("simpl").terminalLocation);
         let compiler = new SimplCompiler();
 
         term.show();
@@ -43,7 +43,7 @@ export function activate(context: vscode.ExtensionContext) {
     let help_command = vscode.commands.registerCommand("extension.simpl_help", () => {
         let helpLocation = vscode.workspace.getConfiguration("simpl").helpLocation;
 
-        let term = vscode.window.createTerminal('simpl');
+        let term = vscode.window.createTerminal('simpl', vscode.workspace.getConfiguration("simpl").terminalLocation);
         term.sendText("\"" + helpLocation + "\"");
         
     });
@@ -65,7 +65,7 @@ function processSimpl(args: string){
     if(doc.languageId === "simpl+"){
         let compiler = new SimplCompiler(); 
         compiler.filepaths.push(doc.fileName);
-        let term = vscode.window.createTerminal('simplCC');
+        let term = vscode.window.createTerminal('simplCC', vscode.workspace.getConfiguration("simpl").terminalLocation);
         term.show();
         term.sendText(compiler.buildCommand(args)); 
     }

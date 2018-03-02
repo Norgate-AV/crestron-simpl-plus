@@ -36,7 +36,7 @@
                 "title": "Simpl+ Help Reference."
             }
         ],
-        "configuration":[
+        "configuration": [
             {
                 "title": "SIMPL+ File Locations",
                 "properties": {
@@ -49,6 +49,11 @@
                         "type": "string",
                         "default": "C:\\Program Files (x86)\\Crestron\\Simpl\\Simpl+lr.chm",
                         "description": "Location of the Simpl+ Help reference"
+                    },
+                    "simpl.terminalLocation": {
+                        "type": "string",
+                        "default": "C:\\WINDOWS\\System32\\cmd.exe",
+                        "description": "Location of the default windows cmd.exe"
                     }
                 }
             }
@@ -77,7 +82,7 @@
                 }
             ]
         },
-        "keybindings":[
+        "keybindings": [
             {
                 "command": "extension.simplCC_Series3",
                 "key": "ctrl+f12",
@@ -98,7 +103,6 @@
                 "key": "ctrl+f1",
                 "when": "resourceLangId == simpl+"
             }
-
         ],
         "snippets": [
             {
@@ -106,17 +110,26 @@
                 "path": "./snippets/simpl.json"
             }
         ],
-        "languages": [{
-            "id": "simpl+",
-            "aliases": ["Crestron", "simpl+"],
-            "extensions": [".usp"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "simpl+",
-            "scopeName": "source.usp",
-            "path": "./syntaxes/crestron-simpl-plus.tmLanguage"
-        }]
+        "languages": [
+            {
+                "id": "simpl+",
+                "aliases": [
+                    "Crestron",
+                    "simpl+"
+                ],
+                "extensions": [
+                    ".usp"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "simpl+",
+                "scopeName": "source.usp",
+                "path": "./syntaxes/crestron-simpl-plus.tmLanguage"
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
