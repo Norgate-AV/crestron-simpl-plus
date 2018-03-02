@@ -1,0 +1,82 @@
+{
+    "name": "crestron-simpl-plus",
+    "displayName": "crestron-simpl-plus",
+    "description": "Extension for Crestron SIMPL+. Includes syntax highlighting and compiler access.",
+    "version": "0.0.1",
+    "publisher": "mwgustin",
+    "engines": {
+        "vscode": "^1.20.0"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "activationEvents": [
+        "onCommand:extension.simplCC_Series3",
+        "onCommand:extension.simplCC_Series2and3",
+        "onCommand:extension.simplCC_Series3All",
+        "onCommand:extension.simpl_help"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.simplCC_Series3",
+                "title": "Simpl+ Series3 Compile Current File"
+            },
+            {
+                "command": "extension.simplCC_Series2and3",
+                "title": "Simpl+ Series2 and Series3 Compile Current File"
+            },
+            {
+                "command": "extension.simplCC_Series3All",
+                "title": "Simpl+ Series3 Compile All Files"
+            },
+            {
+                "command": "extension.simpl_help",
+                "title": "Simpl+ Help Reference."
+            }
+        ],
+        "configuration":[
+            {
+                "title": "SIMPL+ File Locations",
+                "properties": {
+                    "simpl.compiler": {
+                        "type": "string",
+                        "default": "C:\\Program Files (x86)\\Crestron\\Simpl\\SPlusCC.exe",
+                        "description": "Location of the SIMPL+ compiler. Please use double \\\\ for the path."
+                    },
+                    "simpl.helpLocation": {
+                        "type": "string",
+                        "default": "C:\\Program Files (x86)\\Crestron\\Simpl\\Simpl+lr.chm",
+                        "description": "Location of the Simpl+ Help reference"
+                    }
+                }
+            }
+        ],
+        "languages": [{
+            "id": "simpl+",
+            "aliases": ["Crestron", "simpl+"],
+            "extensions": [".usp"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "simpl+",
+            "scopeName": "source.usp",
+            "path": "./syntaxes/crestron-simpl-plus.tmLanguage"
+        }]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "tslint": "^5.8.0",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    }
+}
