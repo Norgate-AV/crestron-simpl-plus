@@ -30,10 +30,10 @@ export function activate(context: vscode.ExtensionContext) {
         term.show();
         foundFiles.then(files => {
             if(files.length) {
-            files.forEach(e => {
-                compiler.filepaths.push(e.fsPath);
-            });
-            term.sendText(compiler.buildCommand("\\target series3"));
+                files.forEach(e => {
+                    compiler.filepaths.push(e.fsPath);
+                });
+                term.sendText(compiler.buildCommand("\\target series3"));
             } else {
                 vscode.window.showErrorMessage("No .usp files found");
             }
@@ -63,11 +63,14 @@ function processSimpl(args: string){
 
     let doc = editor.document;
     if(doc.languageId === "simpl+"){
-        let compiler = new SimplCompiler(); 
-        compiler.filepaths.push(doc.fileName);
-        let term = vscode.window.createTerminal('simplCC', vscode.workspace.getConfiguration("simpl").terminalLocation);
-        term.show();
-        term.sendText(compiler.buildCommand(args)); 
+        let savedDoc = doc.save();
+        savedDoc.then(()=> {
+            let compiler = new SimplCompiler(); 
+            compiler.filepaths.push(doc.fileName);
+            let term = vscode.window.createTerminal('simplCC', vscode.workspace.getConfiguration("simpl").terminalLocation);
+            term.show();
+            term.sendText(compiler.buildCommand(args)); 
+        });
     }
     else {
         vscode.window.showErrorMessage("Please open a valid USP file.");
