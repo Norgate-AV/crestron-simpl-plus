@@ -100,6 +100,12 @@
             }
 
         ],
+        "snippets": [
+            {
+                "language": "simpl+",
+                "path": "./snippets/simpl.json"
+            }
+        ],
         "languages": [{
             "id": "simpl+",
             "aliases": ["Crestron", "simpl+"],
