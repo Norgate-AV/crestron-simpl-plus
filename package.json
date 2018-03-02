@@ -53,6 +53,53 @@
                 }
             }
         ],
+        "menus": {
+            "editor/context": [
+                {
+                    "when": "resourceLangId == simpl+",
+                    "command": "extension.simpl_help",
+                    "group": "navigation"
+                },
+                {
+                    "when": "resourceLangId == simpl+",
+                    "command": "extension.simplCC_Series3",
+                    "group": "navigation"
+                },
+                {
+                    "when": "resourceLangId == simpl+",
+                    "command": "extension.simplCC_Series2and3",
+                    "group": "navigation"
+                },
+                {
+                    "when": "resourceLangId == simpl+",
+                    "command": "extension.simplCC_Series3All",
+                    "group": "navigation"
+                }
+            ]
+        },
+        "keybindings":[
+            {
+                "command": "extension.simplCC_Series3",
+                "key": "ctrl+f12",
+                "when": "resourceLangId == simpl+"
+            },
+            {
+                "command": "extension.simplCC_Series2and3",
+                "key": "ctrl+alt+f12",
+                "when": "resourceLangId == simpl+"
+            },
+            {
+                "command": "extension.simplCC_Series3All",
+                "key": "ctrl+shift+f12",
+                "when": "resourceLangId == simpl+"
+            },
+            {
+                "command": "extension.simpl_help",
+                "key": "ctrl+f1",
+                "when": "resourceLangId == simpl+"
+            }
+
+        ],
         "languages": [{
             "id": "simpl+",
             "aliases": ["Crestron", "simpl+"],

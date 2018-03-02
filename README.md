@@ -16,6 +16,7 @@ This extension contributes the following commands:
 * `extension.simplCC_Series3`: Compiles the currently opened file if it is a SIMPL+ .usp. Targeted at the 3series processors.
 * `extension.simplCC_Series2and3`: Compiles the currently opened file if it is a SIMPL+ .usp. Targeted at both the 2series and 3series processors.
 * `extension.simplCC_Series3All`: Finds all .usp files in the open folder and compiles them all. Targeted at 3series processors only.
+* `extension.simpl_help`: Opens the Crestron SIMPL+ help reference file. 
 
 
 
@@ -25,16 +26,13 @@ This extension contributes the following settings:
 
 * `simpl.compiler`: sets the path of the Simpl+ compiler. Can be set to a custom path via the user settings. Please use the double \ to specify directory paths.
 
-## Recomended keybinding settings
+## Keybindings and Menus
+All commands are added to the right click context menu of the editor tab, and the following keybindings have been added.
+* `ctrl+F1`: Opens Simpl+ Help.
+* `ctrl+F12`: Compiles current file for Series3.
+* `ctrl+alt+F12`: Compiles current file for Series2 and Series3
+* `ctrl+shift+F12`: Compiles all .usp files in the open working folder for Series3.
 
-This extension makes no changes to the keybindings, but some suggested ones are included below. These can be added by opening the command palette (ctrl+shift+p), and type "Open Keyboard Shortcuts File" to open the keybindings.json file. 
-
-```
-[
-    { "key": "ctrl+F12", "command": "extension.simplCC_Series3", "when": "editorLangId == 'simpl+'" },
-    { "key": "ctrl+F1", "command": "extension.simpl_help", "when": "editorLangId == 'simpl+'" }
-]
-```
 
 ## Known Issues
 
