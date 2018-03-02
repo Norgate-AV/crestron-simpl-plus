@@ -10,7 +10,7 @@ Port to VSCode, updates to the tmLanguage file, and all compiler interactions pr
 
 Syntax highlighting. Compiler. 
 
-TODO: Code snippets, code file-type icons, maybe better intellisense and autocompletes.
+TODO: code file-type icons, maybe better intellisense + autocompletes.
 
 This extension contributes the following commands:
 * `extension.simplCC_Series3`: Compiles the currently opened file if it is a SIMPL+ .usp. Targeted at the 3series processors.
@@ -33,6 +33,13 @@ All commands are added to the right click context menu of the editor tab, and th
 * `ctrl+alt+F12`: Compiles current file for Series2 and Series3
 * `ctrl+shift+F12`: Compiles all .usp files in the open working folder for Series3.
 
+## Snippets
+Some basic codes snippets have been added for convenience.
+* `template`: General purpose template with some of the bloat removed and quick edit items ready to get started.
+* `for`: For loop
+* `registerdelegate`: Registers a delegate and creates a boilerplate callback function 
+* `getlast`: GetLastModifiedArrayIndex()
+* `param`: template for adding an input parameter and setting up the properties.
 
 ## Known Issues
 
