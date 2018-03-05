@@ -2,9 +2,6 @@
 
 VSCode Extension which adds syntax highlighting and provides commands in the command pallete for compiling.
 
-The bulk of the tmLanguage file provided Copyright (c) 2013 Alex McLain - MIT License.
-
-Port to VSCode, updates to the tmLanguage file, and all compiler interactions provided Copyright (c) 2018 Michael Gustin and MitreboxAV. 
 
 ## Features
 
