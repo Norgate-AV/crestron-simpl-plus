@@ -2,7 +2,7 @@
     "name": "crestron-simpl-plus",
     "displayName": "crestron-simpl-plus",
     "description": "Extension for Crestron SIMPL+. Includes syntax highlighting and compiler access.",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "publisher": "mwgustin",
     "engines": {
         "vscode": "^1.20.0"

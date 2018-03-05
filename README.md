@@ -2,6 +2,7 @@
 
 VSCode Extension which adds syntax highlighting and provides commands in the command pallete for compiling.
 
+Note: To take advantage of the compiler operations, you must have the Crestron provided Simpl+ Compiler installed.
 
 ## Features
 
