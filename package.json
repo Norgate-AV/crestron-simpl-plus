@@ -1,9 +1,13 @@
 {
     "name": "crestron-simpl-plus",
-    "displayName": "crestron-simpl-plus",
+    "displayName": "Crestron Simpl+",
     "description": "Extension for Crestron SIMPL+. Includes syntax highlighting and compiler access.",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "publisher": "mwgustin",
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.com/mikegustin/crestron-simpl-plus.git"
+    },
     "engines": {
         "vscode": "^1.20.0"
     },
@@ -102,12 +106,6 @@
                 "command": "extension.simpl_help",
                 "key": "ctrl+f1",
                 "when": "resourceLangId == simpl+"
-            }
-        ],
-        "snippets": [
-            {
-                "language": "simpl+",
-                "path": "./snippets/simpl.json"
             }
         ],
         "languages": [
