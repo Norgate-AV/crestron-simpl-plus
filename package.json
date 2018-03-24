@@ -18,7 +18,8 @@
         "onCommand:extension.simplCC_Series3",
         "onCommand:extension.simplCC_Series2and3",
         "onCommand:extension.simplCC_Series3All",
-        "onCommand:extension.simpl_help"
+        "onCommand:extension.simpl_help",
+        "onCommand:extension.simpl_visualize"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -38,6 +39,10 @@
             {
                 "command": "extension.simpl_help",
                 "title": "Simpl+ Help Reference."
+            },
+            {
+                "command": "extension.simpl_visualize",
+                "title": "Visualize SIMPL+ module."
             }
         ],
         "configuration": [
@@ -82,6 +87,11 @@
                 {
                     "when": "resourceLangId == simpl+",
                     "command": "extension.simplCC_Series3All",
+                    "group": "navigation"
+                },
+                {
+                    "when": "resourceLangId == simpl+",
+                    "command": "extension.simpl_visualize",
                     "group": "navigation"
                 }
             ]
@@ -135,6 +145,9 @@
         "watch": "tsc -watch -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "dependencies": {
+        "file-url": "^1.1.0"
     },
     "devDependencies": {
         "typescript": "^2.6.1",
