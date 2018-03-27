@@ -49,10 +49,15 @@ export function activate(context: vscode.ExtensionContext) {
             // let readResource = (filename: string) => fs.readFileSync(path.join(__dirname, "..", "resources", filename), "UTF-8");
             // let viewer = readResource("test.html");
             // return viewer;
-            let viewer = new svg.SVGCreator();
             let parser = new svg.VisualizerParse();
-            parser.returnSignals();
-            console.log(viewer.returnSVG());
+            parser.parseSimplPlus();
+
+            // console.log(parser.myConstants);
+            // console.log(parser.myInputSignals);
+            // console.log(parser.myOutputSignals);
+            // console.log(parser.myParameters);
+
+            let viewer = new svg.SVGCreator(parser);
             return viewer.returnSVG();
         }
         private errorSnippet(error: string): string {
@@ -72,7 +77,6 @@ export function activate(context: vscode.ExtensionContext) {
     let registration = vscode.workspace.registerTextDocumentContentProvider('simpl-visualize', provider);
 
     let series3_compile = vscode.commands.registerCommand('extension.simplCC_Series3', () => {
-        console.log('extension compiling....');
         processSimpl("\\target series3");
     });
 
@@ -99,7 +103,6 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     let simpl_visualize = vscode.commands.registerCommand("extension.simpl_visualize", () => {
-        console.log('in simpl visualize');
         return vscode.commands.executeCommand('vscode.previewHtml', previewUri, vscode.ViewColumn.Two, 'SIMPL Preview').then((success) => {
 		}, (reason) => {
 			vscode.window.showErrorMessage(reason);

@@ -1,122 +1,283 @@
-import * as path from 'path';
 import * as vscode from 'vscode';
-const fileUrl = require('file-url');
-
 
 
 export class SVGCreator {
-    
-    
-    private buildScript(fileName: string):string {
-        let source_path = fileUrl(path.join(
-            __dirname,
-            "..",
-            "resources",
-            fileName));
-        return `<script src="${source_path}" type="text/javascript"></script>`;
+
+    private parser: VisualizerParse;
+    private svgElement: string;
+    private sigSpacing = 50;
+    //private paramSpacing = 10;
+
+    constructor(parser: VisualizerParse) {
+        this.parser = parser;
+        this.svgElement = '';
     }
 
+    private initSVG(){
+        let maxSignals = (
+            (this.parser.myInputSignals > this.parser.myOutputSignals) ? 
+            this.parser.myInputSignals.length : this.parser.myOutputSignals.length);
+        this.svgElement = `<svg width="1000" height="` + (maxSignals*this.sigSpacing+100) + `">`;
+        this.svgElement += this.createRect(200, 10, 500, (maxSignals*this.sigSpacing+20), "rgb(175,175,175)", "clear");
+    }
+
+    private createLine(x: number, y: number, stroke: SigTypes){
+        return `<line x1="${x}" y1="${y}" x2="${x+200}" y2="${y}" stroke="${stroke}"></line>`;
+    }
+    private createText(x:number, y:number, text: string){
+        return `<text x="${x}" y="${y}" fill="black" font-family="Verdana" font-size="14">${text}</text>`;
+    }
+    private createRect(x: number, y: number, width:number, height: number, fill: string, stroke: string){
+        return `<rect x="${x}" y="${y}" width="${width}" height="${height}" stroke="${stroke}" fill="${fill}"></rect>`;
+    }
+
+    private createParam(ySpacing: number, name: string){
+        this.svgElement += this.createRect(300, ySpacing+10, 300, this.sigSpacing, "rgb(125,125,125)", "black");
+        this.svgElement += this.createText(410, ySpacing+40, name);
+    }
+
+    private createInput(ySpacing: number, name: string, type: SigTypes) {
+        this.svgElement += this.createLine(20, ySpacing, type);
+        this.svgElement += this.createText(150, ySpacing-10, name);
+    }
+    
+    private createOutput(ySpacing: number, name: string, type: SigTypes) {
+        this.svgElement += this.createLine(670, ySpacing, type);
+        this.svgElement += this.createText(650, ySpacing-10, name);
+    }
+    
     public returnSVG():string {
+        
+        this.initSVG();
+
+        for (let i = 0; i < this.parser.myParameters.length; i++) {
+            const element = this.parser.myParameters[i];
+            this.createParam(this.sigSpacing*i, element);
+        }
+
+        for (let i = 0; i < this.parser.myInputSignals.length; i++) {
+            const element = this.parser.myInputSignals[i];
+            this.createInput(this.sigSpacing*(i+1), element.name, element.type);
+        }
+
+        for (let i = 0; i < this.parser.myOutputSignals.length; i++) {
+            const element = this.parser.myOutputSignals[i];
+            this.createOutput(this.sigSpacing*(i+1), element.name, element.type);
+        }
+
         let body = `<body style="background-color:white; zoom:0.7">` 
-            + this.buildScript('text.js') 
-            + this.buildScript('parse.js') 
-            //+ this.buildScript('svg.js') 
+            + this.svgElement
+            + `</svg>`
+            +`<br />`
+            +`SIMPL+ Visualizer`
             + `</body>`;
 
         return body;
-
-        // return __dirname;
-        // return `<body style="background-color:white; zoom:0.7">
-        // <svg width="1000" height="4750"><rect x="200" y="10" width="500" height="4670" fill="rgb(175,175,175)"></rect><line x1="20" y1="50" x2="220" y2="50" stroke="clear"></line><text x="150" y="40" fill="black" font-family="Verdana" font-size="14"></text><line x1="20" y1="100" x2="220" y2="100" stroke="clear"></line><text x="150" y="90" fill="black" font-family="Verdana" font-size="14"></text><line x1="20" y1="150" x2="220" y2="150" stroke="blue"></line><text x="150" y="140" fill="black" font-family="Verdana" font-size="14">vc_camera_btn</text><line x1="20" y1="200" x2="220" y2="200" stroke="blue"></line><text x="150" y="190" fill="black" font-family="Verdana" font-size="14">vc_dial_btn</text><line x1="20" y1="250" x2="220" y2="250" stroke="blue"></line><text x="150" y="240" fill="black" font-family="Verdana" font-size="14">vc_share_btn</text><line x1="20" y1="300" x2="220" y2="300" stroke="blue"></line><text x="150" y="290" fill="black" font-family="Verdana" font-size="14">vc_contacts_btn</text><line x1="20" y1="350" x2="220" y2="350" stroke="blue"></line><text x="150" y="340" fill="black" font-family="Verdana" font-size="14">vc_recents_btn</text><line x1="20" y1="400" x2="220" y2="400" stroke="blue"></line><text x="150" y="390" fill="black" font-family="Verdana" font-size="14">vc_meetings_btn</text><line x1="20" y1="450" x2="220" y2="450" stroke="clear"></line><text x="150" y="440" fill="black" font-family="Verdana" font-size="14"></text><line x1="20" y1="500" x2="220" y2="500" stroke="blue"></line><text x="150" y="490" fill="black" font-family="Verdana" font-size="14">vc_1</text><line x1="20" y1="550" x2="220" y2="550" stroke="blue"></line><text x="150" y="540" fill="black" font-family="Verdana" font-size="14">vc_2</text><line x1="20" y1="600" x2="220" y2="600" stroke="blue"></line><text x="150" y="590" fill="black" font-family="Verdana" font-size="14">vc_3</text><line x1="20" y1="650" x2="220" y2="650" stroke="blue"></line><text x="150" y="640" fill="black" font-family="Verdana" font-size="14">vc_4</text><line x1="20" y1="700" x2="220" y2="700" stroke="blue"></line><text x="150" y="690" fill="black" font-family="Verdana" font-size="14">vc_5</text><line x1="20" y1="750" x2="220" y2="750" stroke="blue"></line><text x="150" y="740" fill="black" font-family="Verdana" font-size="14">vc_6</text><line x1="20" y1="800" x2="220" y2="800" stroke="blue"></line><text x="150" y="790" fill="black" font-family="Verdana" font-size="14">vc_7</text><line x1="20" y1="850" x2="220" y2="850" stroke="blue"></line><text x="150" y="840" fill="black" font-family="Verdana" font-size="14">vc_8</text><line x1="20" y1="900" x2="220" y2="900" stroke="blue"></line><text x="150" y="890" fill="black" font-family="Verdana" font-size="14">vc_9</text><line x1="20" y1="950" x2="220" y2="950" stroke="blue"></line><text x="150" y="940" fill="black" font-family="Verdana" font-size="14">vc_0</text><line x1="20" y1="1000" x2="220" y2="1000" stroke="blue"></line><text x="150" y="990" fill="black" font-family="Verdana" font-size="14">vc_period</text><line x1="20" y1="1050" x2="220" y2="1050" stroke="blue"></line><text x="150" y="1040" fill="black" font-family="Verdana" font-size="14">vc_pound</text><line x1="20" y1="1100" x2="220" y2="1100" stroke="blue"></line><text x="150" y="1090" fill="black" font-family="Verdana" font-size="14">vc_star</text><line x1="20" y1="1150" x2="220" y2="1150" stroke="blue"></line><text x="150" y="1140" fill="black" font-family="Verdana" font-size="14">vc_clear</text><line x1="20" y1="1200" x2="220" y2="1200" stroke="blue"></line><text x="150" y="1190" fill="black" font-family="Verdana" font-size="14">vc_bsp</text><line x1="20" y1="1250" x2="220" y2="1250" stroke="clear"></line><text x="150" y="1240" fill="black" font-family="Verdana" font-size="14"></text><line x1="20" y1="1300" x2="220" y2="1300" stroke="blue"></line><text x="150" y="1290" fill="black" font-family="Verdana" font-size="14">vc_dial</text><line x1="20" y1="1350" x2="220" y2="1350" stroke="blue"></line><text x="150" y="1340" fill="black" font-family="Verdana" font-size="14">vc_hangup</text><line x1="20" y1="1400" x2="220" y2="1400" stroke="blue"></line><text x="150" y="1390" fill="black" font-family="Verdana" font-size="14">vc_answer</text><line x1="20" y1="1450" x2="220" y2="1450" stroke="blue"></line><text x="150" y="1440" fill="black" font-family="Verdana" font-size="14">vc_ignore</text><line x1="20" y1="1500" x2="220" y2="1500" stroke="clear"></line><text x="150" y="1490" fill="black" font-family="Verdana" font-size="14"></text><line x1="20" y1="1550" x2="220" y2="1550" stroke="blue"></line><text x="150" y="1540" fill="black" font-family="Verdana" font-size="14">camera_up</text><line x1="20" y1="1600" x2="220" y2="1600" stroke="blue"></line><text x="150" y="1590" fill="black" font-family="Verdana" font-size="14">camera_down</text><line x1="20" y1="1650" x2="220" y2="1650" stroke="blue"></line><text x="150" y="1640" fill="black" font-family="Verdana" font-size="14">camera_left</text><line x1="20" y1="1700" x2="220" y2="1700" stroke="blue"></line><text x="150" y="1690" fill="black" font-family="Verdana" font-size="14">camera_right</text><line x1="20" y1="1750" x2="220" y2="1750" stroke="blue"></line><text x="150" y="1740" fill="black" font-family="Verdana" font-size="14">camera_zoom_in</text><line x1="20" y1="1800" x2="220" y2="1800" stroke="blue"></line><text x="150" y="1790" fill="black" font-family="Verdana" font-size="14">camera_zoom_out</text><line x1="20" y1="1850" x2="220" y2="1850" stroke="blue"></line><text x="150" y="1840" fill="black" font-family="Verdana" font-size="14">stop_content</text><line x1="20" y1="1900" x2="220" y2="1900" stroke="clear"></line><text x="150" y="1890" fill="black" font-family="Verdana" font-size="14"></text><line x1="20" y1="1950" x2="220" y2="1950" stroke="blue"></line><text x="150" y="1940" fill="black" font-family="Verdana" font-size="14">selfview_toggle</text><line x1="20" y1="2000" x2="220" y2="2000" stroke="blue"></line><text x="150" y="1990" fill="black" font-family="Verdana" font-size="14">selfview_fullscreen</text><line x1="20" y1="2050" x2="220" y2="2050" stroke="blue"></line><text x="150" y="2040" fill="black" font-family="Verdana" font-size="14">selfview_position</text><line x1="20" y1="2100" x2="220" y2="2100" stroke="clear"></line><text x="150" y="2090" fill="black" font-family="Verdana" font-size="14"></text><line x1="20" y1="2150" x2="220" y2="2150" stroke="blue"></line><text x="150" y="2140" fill="black" font-family="Verdana" font-size="14">ir_up</text><line x1="20" y1="2200" x2="220" y2="2200" stroke="blue"></line><text x="150" y="2190" fill="black" font-family="Verdana" font-size="14">ir_down</text><line x1="20" y1="2250" x2="220" y2="2250" stroke="blue"></line><text x="150" y="2240" fill="black" font-family="Verdana" font-size="14">ir_left</text><line x1="20" y1="2300" x2="220" y2="2300" stroke="blue"></line><text x="150" y="2290" fill="black" font-family="Verdana" font-size="14">ir_right</text><line x1="20" y1="2350" x2="220" y2="2350" stroke="blue"></line><text x="150" y="2340" fill="black" font-family="Verdana" font-size="14">ir_OK</text><line x1="20" y1="2400" x2="220" y2="2400" stroke="blue"></line><text x="150" y="2390" fill="black" font-family="Verdana" font-size="14">ir_home</text><line x1="20" y1="2450" x2="220" y2="2450" stroke="blue"></line><text x="150" y="2440" fill="black" font-family="Verdana" font-size="14">ir_back</text><line x1="20" y1="2500" x2="220" y2="2500" stroke="blue"></line><text x="150" y="2490" fill="black" font-family="Verdana" font-size="14">ir_menu</text><line x1="20" y1="2550" x2="220" y2="2550" stroke="clear"></line><text x="150" y="2540" fill="black" font-family="Verdana" font-size="14"></text><line x1="20" y1="2600" x2="220" y2="2600" stroke="blue"></line><text x="150" y="2590" fill="black" font-family="Verdana" font-size="14">camera_presets[1]</text><line x1="20" y1="2650" x2="220" y2="2650" stroke="blue"></line><text x="150" y="2640" fill="black" font-family="Verdana" font-size="14">camera_presets[2]</text><line x1="20" y1="2700" x2="220" y2="2700" stroke="blue"></line><text x="150" y="2690" fill="black" font-family="Verdana" font-size="14">camera_presets[3]</text><line x1="20" y1="2750" x2="220" y2="2750" stroke="blue"></line><text x="150" y="2740" fill="black" font-family="Verdana" font-size="14">camera_presets[4]</text><line x1="20" y1="2800" x2="220" y2="2800" stroke="blue"></line><text x="150" y="2790" fill="black" font-family="Verdana" font-size="14">camera_presets[5]</text><line x1="20" y1="2850" x2="220" y2="2850" stroke="clear"></line><text x="150" y="2840" fill="black" font-family="Verdana" font-size="14"></text><line x1="20" y1="2900" x2="220" y2="2900" stroke="red"></line><text x="150" y="2890" fill="black" font-family="Verdana" font-size="14">TP_ID</text><line x1="20" y1="2950" x2="220" y2="2950" stroke="red"></line><text x="150" y="2940" fill="black" font-family="Verdana" font-size="14">camera_select</text><line x1="20" y1="3000" x2="220" y2="3000" stroke="red"></line><text x="150" y="2990" fill="black" font-family="Verdana" font-size="14">content_select</text><line x1="20" y1="3050" x2="220" y2="3050" stroke="clear"></line><text x="150" y="3040" fill="black" font-family="Verdana" font-size="14"></text><line x1="20" y1="3100" x2="220" y2="3100" stroke="black"></line><text x="150" y="3090" fill="black" font-family="Verdana" font-size="14">dialnum</text><line x1="670" y1="50" x2="870" y2="50" stroke="clear"></line><text x="650" y="40" fill="black" font-family="Verdana" font-size="14"></text><line x1="670" y1="100" x2="870" y2="100" stroke="clear"></line><text x="650" y="90" fill="black" font-family="Verdana" font-size="14"></text><line x1="670" y1="150" x2="870" y2="150" stroke="blue"></line><text x="650" y="140" fill="black" font-family="Verdana" font-size="14">vc_camera_popup</text><line x1="670" y1="200" x2="870" y2="200" stroke="blue"></line><text x="650" y="190" fill="black" font-family="Verdana" font-size="14">vc_dial_popup</text><line x1="670" y1="250" x2="870" y2="250" stroke="blue"></line><text x="650" y="240" fill="black" font-family="Verdana" font-size="14">vc_share_popup</text><line x1="670" y1="300" x2="870" y2="300" stroke="blue"></line><text x="650" y="290" fill="black" font-family="Verdana" font-size="14">vc_contacts_popup</text><line x1="670" y1="350" x2="870" y2="350" stroke="blue"></line><text x="650" y="340" fill="black" font-family="Verdana" font-size="14">vc_recents_popup</text><line x1="670" y1="400" x2="870" y2="400" stroke="blue"></line><text x="650" y="390" fill="black" font-family="Verdana" font-size="14">vc_meetings_popup</text><line x1="670" y1="450" x2="870" y2="450" stroke="clear"></line><text x="650" y="440" fill="black" font-family="Verdana" font-size="14"></text><line x1="670" y1="500" x2="870" y2="500" stroke="blue"></line><text x="650" y="490" fill="black" font-family="Verdana" font-size="14">vc_ringing</text><line x1="670" y1="550" x2="870" y2="550" stroke="clear"></line><text x="650" y="540" fill="black" font-family="Verdana" font-size="14"></text><line x1="670" y1="600" x2="870" y2="600" stroke="blue"></line><text x="650" y="590" fill="black" font-family="Verdana" font-size="14">vc_call_connected</text><line x1="670" y1="650" x2="870" y2="650" stroke="clear"></line><text x="650" y="640" fill="black" font-family="Verdana" font-size="14"></text><line x1="670" y1="700" x2="870" y2="700" stroke="clear"></line><text x="650" y="690" fill="black" font-family="Verdana" font-size="14"></text><line x1="670" y1="750" x2="870" y2="750" stroke="red"></line><text x="650" y="740" fill="black" font-family="Verdana" font-size="14">camera_selected</text><line x1="670" y1="800" x2="870" y2="800" stroke="red"></line><text x="650" y="790" fill="black" font-family="Verdana" font-size="14">Camera_count</text><line x1="670" y1="850" x2="870" y2="850" stroke="red"></line><text x="650" y="840" fill="black" font-family="Verdana" font-size="14">content_selected</text><line x1="670" y1="900" x2="870" y2="900" stroke="red"></line><text x="650" y="890" fill="black" font-family="Verdana" font-size="14">Content_count</text><line x1="670" y1="950" x2="870" y2="950" stroke="clear"></line><text x="650" y="940" fill="black" font-family="Verdana" font-size="14"></text><line x1="670" y1="1000" x2="870" y2="1000" stroke="black"></line><text x="650" y="990" fill="black" font-family="Verdana" font-size="14">dialnum_fb</text><line x1="670" y1="1050" x2="870" y2="1050" stroke="clear"></line><text x="650" y="1040" fill="black" font-family="Verdana" font-size="14"></text><line x1="670" y1="1100" x2="870" y2="1100" stroke="black"></line><text x="650" y="1090" fill="black" font-family="Verdana" font-size="14">camera_name[1]</text><line x1="670" y1="1150" x2="870" y2="1150" stroke="black"></line><text x="650" y="1140" fill="black" font-family="Verdana" font-size="14">camera_name[2]</text><line x1="670" y1="1200" x2="870" y2="1200" stroke="black"></line><text x="650" y="1190" fill="black" font-family="Verdana" font-size="14">camera_name[3]</text><line x1="670" y1="1250" x2="870" y2="1250" stroke="black"></line><text x="650" y="1240" fill="black" font-family="Verdana" font-size="14">camera_name[4]</text><line x1="670" y1="1300" x2="870" y2="1300" stroke="black"></line><text x="650" y="1290" fill="black" font-family="Verdana" font-size="14">camera_name[5]</text><line x1="670" y1="1350" x2="870" y2="1350" stroke="black"></line><text x="650" y="1340" fill="black" font-family="Verdana" font-size="14">camera_icon[1]</text><line x1="670" y1="1400" x2="870" y2="1400" stroke="black"></line><text x="650" y="1390" fill="black" font-family="Verdana" font-size="14">camera_icon[2]</text><line x1="670" y1="1450" x2="870" y2="1450" stroke="black"></line><text x="650" y="1440" fill="black" font-family="Verdana" font-size="14">camera_icon[3]</text><line x1="670" y1="1500" x2="870" y2="1500" stroke="black"></line><text x="650" y="1490" fill="black" font-family="Verdana" font-size="14">camera_icon[4]</text><line x1="670" y1="1550" x2="870" y2="1550" stroke="black"></line><text x="650" y="1540" fill="black" font-family="Verdana" font-size="14">camera_icon[5]</text><line x1="670" y1="1600" x2="870" y2="1600" stroke="clear"></line><text x="650" y="1590" fill="black" font-family="Verdana" font-size="14"></text><line x1="670" y1="1650" x2="870" y2="1650" stroke="black"></line><text x="650" y="1640" fill="black" font-family="Verdana" font-size="14">content_name[1]</text><line x1="670" y1="1700" x2="870" y2="1700" stroke="black"></line><text x="650" y="1690" fill="black" font-family="Verdana" font-size="14">content_name[2]</text><line x1="670" y1="1750" x2="870" y2="1750" stroke="black"></line><text x="650" y="1740" fill="black" font-family="Verdana" font-size="14">content_name[3]</text><line x1="670" y1="1800" x2="870" y2="1800" stroke="black"></line><text x="650" y="1790" fill="black" font-family="Verdana" font-size="14">content_name[4]</text><line x1="670" y1="1850" x2="870" y2="1850" stroke="black"></line><text x="650" y="1840" fill="black" font-family="Verdana" font-size="14">content_name[5]</text><line x1="670" y1="1900" x2="870" y2="1900" stroke="black"></line><text x="650" y="1890" fill="black" font-family="Verdana" font-size="14">content_name[6]</text><line x1="670" y1="1950" x2="870" y2="1950" stroke="black"></line><text x="650" y="1940" fill="black" font-family="Verdana" font-size="14">content_name[7]</text><line x1="670" y1="2000" x2="870" y2="2000" stroke="black"></line><text x="650" y="1990" fill="black" font-family="Verdana" font-size="14">content_name[8]</text><line x1="670" y1="2050" x2="870" y2="2050" stroke="black"></line><text x="650" y="2040" fill="black" font-family="Verdana" font-size="14">content_name[9]</text><line x1="670" y1="2100" x2="870" y2="2100" stroke="black"></line><text x="650" y="2090" fill="black" font-family="Verdana" font-size="14">content_name[10]</text><line x1="670" y1="2150" x2="870" y2="2150" stroke="black"></line><text x="650" y="2140" fill="black" font-family="Verdana" font-size="14">content_name[11]</text><line x1="670" y1="2200" x2="870" y2="2200" stroke="black"></line><text x="650" y="2190" fill="black" font-family="Verdana" font-size="14">content_name[12]</text><line x1="670" y1="2250" x2="870" y2="2250" stroke="black"></line><text x="650" y="2240" fill="black" font-family="Verdana" font-size="14">content_name[13]</text><line x1="670" y1="2300" x2="870" y2="2300" stroke="black"></line><text x="650" y="2290" fill="black" font-family="Verdana" font-size="14">content_name[14]</text><line x1="670" y1="2350" x2="870" y2="2350" stroke="black"></line><text x="650" y="2340" fill="black" font-family="Verdana" font-size="14">content_name[15]</text><line x1="670" y1="2400" x2="870" y2="2400" stroke="black"></line><text x="650" y="2390" fill="black" font-family="Verdana" font-size="14">content_name[16]</text><line x1="670" y1="2450" x2="870" y2="2450" stroke="black"></line><text x="650" y="2440" fill="black" font-family="Verdana" font-size="14">content_name[17]</text><line x1="670" y1="2500" x2="870" y2="2500" stroke="black"></line><text x="650" y="2490" fill="black" font-family="Verdana" font-size="14">content_name[18]</text><line x1="670" y1="2550" x2="870" y2="2550" stroke="black"></line><text x="650" y="2540" fill="black" font-family="Verdana" font-size="14">content_name[19]</text><line x1="670" y1="2600" x2="870" y2="2600" stroke="black"></line><text x="650" y="2590" fill="black" font-family="Verdana" font-size="14">content_name[20]</text><line x1="670" y1="2650" x2="870" y2="2650" stroke="black"></line><text x="650" y="2640" fill="black" font-family="Verdana" font-size="14">content_name[21]</text><line x1="670" y1="2700" x2="870" y2="2700" stroke="black"></line><text x="650" y="2690" fill="black" font-family="Verdana" font-size="14">content_name[22]</text><line x1="670" y1="2750" x2="870" y2="2750" stroke="black"></line><text x="650" y="2740" fill="black" font-family="Verdana" font-size="14">content_name[23]</text><line x1="670" y1="2800" x2="870" y2="2800" stroke="black"></line><text x="650" y="2790" fill="black" font-family="Verdana" font-size="14">content_name[24]</text><line x1="670" y1="2850" x2="870" y2="2850" stroke="black"></line><text x="650" y="2840" fill="black" font-family="Verdana" font-size="14">content_name[25]</text><line x1="670" y1="2900" x2="870" y2="2900" stroke="black"></line><text x="650" y="2890" fill="black" font-family="Verdana" font-size="14">content_name[26]</text><line x1="670" y1="2950" x2="870" y2="2950" stroke="black"></line><text x="650" y="2940" fill="black" font-family="Verdana" font-size="14">content_name[27]</text><line x1="670" y1="3000" x2="870" y2="3000" stroke="black"></line><text x="650" y="2990" fill="black" font-family="Verdana" font-size="14">content_name[28]</text><line x1="670" y1="3050" x2="870" y2="3050" stroke="black"></line><text x="650" y="3040" fill="black" font-family="Verdana" font-size="14">content_name[29]</text><line x1="670" y1="3100" x2="870" y2="3100" stroke="black"></line><text x="650" y="3090" fill="black" font-family="Verdana" font-size="14">content_name[30]</text><line x1="670" y1="3150" x2="870" y2="3150" stroke="black"></line><text x="650" y="3140" fill="black" font-family="Verdana" font-size="14">content_icon[1]</text><line x1="670" y1="3200" x2="870" y2="3200" stroke="black"></line><text x="650" y="3190" fill="black" font-family="Verdana" font-size="14">content_icon[2]</text><line x1="670" y1="3250" x2="870" y2="3250" stroke="black"></line><text x="650" y="3240" fill="black" font-family="Verdana" font-size="14">content_icon[3]</text><line x1="670" y1="3300" x2="870" y2="3300" stroke="black"></line><text x="650" y="3290" fill="black" font-family="Verdana" font-size="14">content_icon[4]</text><line x1="670" y1="3350" x2="870" y2="3350" stroke="black"></line><text x="650" y="3340" fill="black" font-family="Verdana" font-size="14">content_icon[5]</text><line x1="670" y1="3400" x2="870" y2="3400" stroke="black"></line><text x="650" y="3390" fill="black" font-family="Verdana" font-size="14">content_icon[6]</text><line x1="670" y1="3450" x2="870" y2="3450" stroke="black"></line><text x="650" y="3440" fill="black" font-family="Verdana" font-size="14">content_icon[7]</text><line x1="670" y1="3500" x2="870" y2="3500" stroke="black"></line><text x="650" y="3490" fill="black" font-family="Verdana" font-size="14">content_icon[8]</text><line x1="670" y1="3550" x2="870" y2="3550" stroke="black"></line><text x="650" y="3540" fill="black" font-family="Verdana" font-size="14">content_icon[9]</text><line x1="670" y1="3600" x2="870" y2="3600" stroke="black"></line><text x="650" y="3590" fill="black" font-family="Verdana" font-size="14">content_icon[10]</text><line x1="670" y1="3650" x2="870" y2="3650" stroke="black"></line><text x="650" y="3640" fill="black" font-family="Verdana" font-size="14">content_icon[11]</text><line x1="670" y1="3700" x2="870" y2="3700" stroke="black"></line><text x="650" y="3690" fill="black" font-family="Verdana" font-size="14">content_icon[12]</text><line x1="670" y1="3750" x2="870" y2="3750" stroke="black"></line><text x="650" y="3740" fill="black" font-family="Verdana" font-size="14">content_icon[13]</text><line x1="670" y1="3800" x2="870" y2="3800" stroke="black"></line><text x="650" y="3790" fill="black" font-family="Verdana" font-size="14">content_icon[14]</text><line x1="670" y1="3850" x2="870" y2="3850" stroke="black"></line><text x="650" y="3840" fill="black" font-family="Verdana" font-size="14">content_icon[15]</text><line x1="670" y1="3900" x2="870" y2="3900" stroke="black"></line><text x="650" y="3890" fill="black" font-family="Verdana" font-size="14">content_icon[16]</text><line x1="670" y1="3950" x2="870" y2="3950" stroke="black"></line><text x="650" y="3940" fill="black" font-family="Verdana" font-size="14">content_icon[17]</text><line x1="670" y1="4000" x2="870" y2="4000" stroke="black"></line><text x="650" y="3990" fill="black" font-family="Verdana" font-size="14">content_icon[18]</text><line x1="670" y1="4050" x2="870" y2="4050" stroke="black"></line><text x="650" y="4040" fill="black" font-family="Verdana" font-size="14">content_icon[19]</text><line x1="670" y1="4100" x2="870" y2="4100" stroke="black"></line><text x="650" y="4090" fill="black" font-family="Verdana" font-size="14">content_icon[20]</text><line x1="670" y1="4150" x2="870" y2="4150" stroke="black"></line><text x="650" y="4140" fill="black" font-family="Verdana" font-size="14">content_icon[21]</text><line x1="670" y1="4200" x2="870" y2="4200" stroke="black"></line><text x="650" y="4190" fill="black" font-family="Verdana" font-size="14">content_icon[22]</text><line x1="670" y1="4250" x2="870" y2="4250" stroke="black"></line><text x="650" y="4240" fill="black" font-family="Verdana" font-size="14">content_icon[23]</text><line x1="670" y1="4300" x2="870" y2="4300" stroke="black"></line><text x="650" y="4290" fill="black" font-family="Verdana" font-size="14">content_icon[24]</text><line x1="670" y1="4350" x2="870" y2="4350" stroke="black"></line><text x="650" y="4340" fill="black" font-family="Verdana" font-size="14">content_icon[25]</text><line x1="670" y1="4400" x2="870" y2="4400" stroke="black"></line><text x="650" y="4390" fill="black" font-family="Verdana" font-size="14">content_icon[26]</text><line x1="670" y1="4450" x2="870" y2="4450" stroke="black"></line><text x="650" y="4440" fill="black" font-family="Verdana" font-size="14">content_icon[27]</text><line x1="670" y1="4500" x2="870" y2="4500" stroke="black"></line><text x="650" y="4490" fill="black" font-family="Verdana" font-size="14">content_icon[28]</text><line x1="670" y1="4550" x2="870" y2="4550" stroke="black"></line><text x="650" y="4540" fill="black" font-family="Verdana" font-size="14">content_icon[29]</text><line x1="670" y1="4600" x2="870" y2="4600" stroke="black"></line><text x="650" y="4590" fill="black" font-family="Verdana" font-size="14">content_icon[30]</text><line x1="670" y1="4650" x2="870" y2="4650" stroke="black"></line><text x="650" y="4640" fill="black" font-family="Verdana" font-size="14">testing[MAX_Con][1]</text><rect x="300" y="10" width="300" height="50" stroke="black" fill="rgb(125,125,125)"></rect><text x="410" y="40" fill="black" font-family="Verdana" font-size="14">font_size</text></svg>
-        // </body>`
     }
 }
+
+enum SigTypes {
+    "digital" = "blue",
+    "analog" = "red",
+    "string" = "black",
+    "_skip_" = "clear"
+}
+
+enum IOTypes {
+    "input",
+    "output"
+}
+
+interface SimplSignal {
+    name: string;
+    type: SigTypes;
+}
+
+interface Constant {
+    [constName: string]: string;
+}
+
+interface RegExSignals {
+    pattern: RegExp;
+    type: SigTypes;
+    io: IOTypes;
+}
+
+
 
 export class VisualizerParse {
 
     public fileText: string = '';
-    //this is known roken right now. need to port over from the parse.js
-    public myInputSignals;
+    public myInputSignals: SimplSignal[] = [];
+    public myOutputSignals: SimplSignal[] = [];
+    public myParameters: string[] = [];
+    public myConstants: Constant = {};
+
+    private myRegExSignals: RegExSignals[] = [];
 
     private regExPatterns = {
-        'array': /(?<=\[).+?(?=\])/gim,
-        'arrayCommas': /\[([^\[\]]*?),([^\]\]]*?)\]/gim,
-        'comment': /(\/\/)(.*?)(?=\n)/g,
-        'blockComment': /(\/\*)(.*?)(\*\/)/gs,
-        'digitalIn':    /(?<=DIGITAL_INPUT)(.*?)(?=;)/gmsi,
-        'digitalOut':   /(?<=DIGITAL_OUTPUT)(.*?)(?=;)/gmsi,
-        'analogIn':     /(?<=ANALOG_INPUT)(.*?)(?=;)/gmsi,
-        'analogOut':    /(?<=ANALOG_OUTPUT)(.*?)(?=;)/gmsi,
-        'stringIn':     /(?<=STRING_INPUT)(.*?)(?=;)/gmsi,
-        'stringOut':    /(?<=STRING_OUTPUT)(.*?)(?=;)/gmsi,
-        'bufferIn':     /(?<=BUFFER_INPUT)(.*?)(?=;)/gmsi,
-        'allIO':		/(DIGITAL_INPUT|ANALOG_INPUT|STRING_INPUT|BUFFER_INPUT|DIGITAL_OUTPUT|ANALOG_OUTPUT|STRING_OUTPUT)(.*?)(;)/gmsi,
-        'paramFull':    /(?:integer_parameter|long_integer_parameter|signed_integer_parameter|signed_long_integer_parameter|string_parameter)(.*?)(;)/gmis,
-        'paramType':    /(integer_parameter|long_integer_parameter|signed_integer_parameter|signed_long_integer_parameter|string_parameter)/gsim,
-        'constants':    /(?<=#DEFINE_CONSTANT )(.*?)(?=\n)/g,
+        'array':        /\[(.+?)\]/gim,
+        'arrayCommas':  /\[([^\[\]]*?),([^\]\]]*?)\]/gim,
+        'comment':    /(\/\/)(.*?)(?=\r\n)/g,
+        'blockComment': /(\/\*)([\S\s]*?)(\*\/)/g,
+        'digitalIn':    /DIGITAL_INPUT([\S\s]*?)(?=;)/gmi,
+        'digitalOut':   /DIGITAL_OUTPUT([\S\s]*?)(?=;)/gmi,
+        'analogIn':     /ANALOG_INPUT([\S\s]*?)(?=;)/gmi,
+        'analogOut':    /ANALOG_OUTPUT([\S\s]*?)(?=;)/gmi,
+        'stringIn':     /STRING_INPUT([\S\s]*?)(?=;)/gmi,
+        'stringOut':    /STRING_OUTPUT([\S\s]*?)(?=;)/gmi,
+        'bufferIn':     /BUFFER_INPUT([\S\s]*?)(?=;)/gmi,
+        'allIO':		/(DIGITAL_INPUT|ANALOG_INPUT|STRING_INPUT|BUFFER_INPUT|DIGITAL_OUTPUT|ANALOG_OUTPUT|STRING_OUTPUT)([\S\s]*?)(;)/gmi,
+        'paramFull':    /(?:integer_parameter|long_integer_parameter|signed_integer_parameter|signed_long_integer_parameter|string_parameter)([\S\s]*?)(;)/gmi,
+        'paramType':    /(integer_parameter|long_integer_parameter|signed_integer_parameter|signed_long_integer_parameter|string_parameter)/gmi,
+        'constants':    /#DEFINE_CONSTANT(.*?)(?=\r\n)/g,
     };
 
+
     constructor(){
-        
+        this.myRegExSignals.push( {pattern: this.regExPatterns['digitalIn'], type: SigTypes.digital, io: IOTypes.input });
+        this.myRegExSignals.push( {pattern: this.regExPatterns['digitalOut'], type: SigTypes.digital, io: IOTypes.output });
+        this.myRegExSignals.push( {pattern: this.regExPatterns['analogIn'], type: SigTypes.analog, io: IOTypes.input });
+        this.myRegExSignals.push( {pattern: this.regExPatterns['analogOut'], type: SigTypes.analog, io: IOTypes.output });
+        this.myRegExSignals.push( {pattern: this.regExPatterns['stringIn'], type: SigTypes.string, io: IOTypes.input });
+        this.myRegExSignals.push( {pattern: this.regExPatterns['stringOut'], type: SigTypes.string, io: IOTypes.output });
+        this.myRegExSignals.push( {pattern: this.regExPatterns['bufferIn'], type: SigTypes.string, io: IOTypes.input });
     }
 
-    public returnSignals(){
+    public parseSimplPlus(){
         const editor = vscode.window.activeTextEditor;
         if(editor) {
             this.fileText = editor.document.getText();
 
-            let filtered = this.fileText.replace(this.regExPatterns['comment'], '');
-            filtered = filtered.replace(this.regExPatterns['blockComment'], '');
-            filtered = filtered.replace(this.regExPatterns['arrayCommas'], '[$2]');
+            let filtered = this.fileText.replace(this.regExPatterns['blockComment'], '');
+            filtered = filtered.replace(this.regExPatterns['comment'], '');
+            filtered = filtered.replace(this.regExPatterns['arrayCommas'], '[$1]');
 
             //constants
-            let constants = filtered.match(regExPatterns['constants']);
+            let constants = this.regExPatterns['constants'].exec(filtered);
             if(constants) {
                 constants.forEach(element => {
-                    let myConst = element.split(' ');
-                    this.myConstants[myConst[0]] = myConst[1];
+                    let myConst = element.split(/\s+/g);
+                    this.myConstants[myConst[1]] = myConst[2];
                 });
             }
 
 
             //separate out ot each group in order
-            let parsedAll = filtered.match(regExPatterns['allIO']);
-
-            console.log(parsedAll);
+            let parsedAll = filtered.match(this.regExPatterns['allIO']);
 
             //if we find, then go through each group and parse the specific element and add to main IO
             if (parsedAll) {
                 parsedAll.forEach(element => {
                     //do this better eventually
-                    if (element.match(regExPatterns['digitalIn'])) {
-                        IOParse(element.match(regExPatterns['digitalIn'])[0], 'blue', 'input');
-                    }
-                    else if(element.match(regExPatterns['digitalOut'])){
-                        IOParse(element.match(regExPatterns['digitalOut'])[0], 'blue', 'output');
-                    }
-                    else if(element.match(regExPatterns['analogIn'])){
-                        IOParse(element.match(regExPatterns['analogIn'])[0], 'red', 'input');
-                    }
-                    else if(element.match(regExPatterns['analogOut'])){
-                        IOParse(element.match(regExPatterns['analogOut'])[0], 'red', 'output');
-                    }
-                    else if(element.match(regExPatterns['stringIn'])){
-                        IOParse(element.match(regExPatterns['stringIn'])[0], 'black', 'input');
-                    }
-                    else if(element.match(regExPatterns['stringOut'])){
-                        IOParse(element.match(regExPatterns['stringOut'])[0], 'black', 'output');
-                    }
-                    else if(element.match(regExPatterns['bufferIn'])) {
-                        IOParse(element.match(regExPatterns['bufferIn'])[0], 'black', 'input');
-                    }
+                    this.myRegExSignals.forEach(regExSig => {
+                        let sig = regExSig.pattern.exec(element);
+                        if (sig) {
+                            this.IOParse(sig[1], regExSig.type, regExSig.io);
+                        }
+                    });
                 });
             }
 
-
-            if(filtered.match(regExPatterns['paramFull'])){
-                paramParse(filtered.match(regExPatterns['paramFull']))
+            let param;
+            if(param = filtered.match(this.regExPatterns['paramFull'])){
+                this.paramParse(param);
             }
         }
+        
+    }
+
+    private paramParse(input: RegExpMatchArray){
+        input.forEach(element => {
+            let parsed = element.replace(this.regExPatterns['paramType'], '');
+            let filtered = parsed.replace(/\s/g, '').replace(';','').split(',');
+            filtered.forEach(item => {
+                this.myParameters.push(item);
+            });
+        });
+    }
+
+    private IOParse(input: string, type: SigTypes, io: IOTypes) {
+        let parsed = input.replace(/\s/g, '').replace(';', '').split(',');
+        parsed.forEach(element => {
+            element.match(this.regExPatterns['array']); //this breaks the next line in some situations if commented for some reason.
+            let array = this.regExPatterns['array'].exec(element);
+            if (array) {
+                let sigName = element.split('[',)[0];
+                let tempArrayLength = array[1];
+                let arrayLength;
+    
+                //special case for string/buffer input size vs full array size
+                if(type===SigTypes.string && io === IOTypes.input && array.length === 1) {
+                    this.myInputSignals.push({
+                        'name': sigName,
+                        'type': type,
+                        });
+                }
+                else {
+                    //if array length is a constant isntead of number
+                    if (isNaN(Number(tempArrayLength))){
+                        //handle if constant is mistyped or otherwise doesn't exist.
+                        if (typeof this.myConstants[tempArrayLength] !== 'undefined'){
+                            arrayLength = this.myConstants[tempArrayLength];
+                        }
+                        else {
+                            arrayLength = 1;
+                            sigName += `[${tempArrayLength}]`;
+                        }
+                    }
+                    else {
+                        arrayLength = tempArrayLength;
+                    }
+    
+                    for (let i = 0; i < arrayLength; i++) {
+                        if(io === IOTypes.input){
+                            this.myInputSignals.push({
+                                'name': sigName + `[${i+1}]`,
+                                'type':  type,
+                            });  
+                        }
+                        else if (io === IOTypes.output) {
+                            this.myOutputSignals.push({
+                                'name': sigName + `[${i+1}]`,
+                                'type':  type,
+                            });
+                        }
+                    }
+                }
+                
+            }
+            else {
+                if(element.toLowerCase() === '_skip_'){
+                    if(io === IOTypes.input){
+                        this.myInputSignals.push({
+                            'name': '',
+                            'type': SigTypes._skip_,
+                        });
+                    }
+                    else if (io === IOTypes.output) {
+                        this.myOutputSignals.push({
+                            'name': '',
+                            'type': SigTypes._skip_,
+                        });
+                    }
+                }
+                else {
+                    if(io === IOTypes.input){
+                        this.myInputSignals.push({
+                            'name': element,
+                            'type': type,
+                            });
+                    }
+                    else if (io === IOTypes.output) {
+                        this.myOutputSignals.push({
+                            'name': element,
+                            'type': type,
+                            });
+                    }
+                }
+            }
+        });
         
     }
 }
