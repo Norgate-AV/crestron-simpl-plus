@@ -154,10 +154,10 @@ export class VisualizerParse {
             filtered = filtered.replace(this.regExPatterns['arrayCommas'], '[$1]');
 
             //constants
-            let constants = this.regExPatterns['constants'].exec(filtered);
+            let constants = filtered.match(this.regExPatterns['constants']);
             if(constants) {
                 constants.forEach(element => {
-                    let myConst = element.split(/\s+/g);
+                    let myConst = element.replace(this.regExPatterns['constants'], '$1').split(/\s+/g);
                     this.myConstants[myConst[1]] = myConst[2];
                 });
             }
@@ -200,15 +200,15 @@ export class VisualizerParse {
     private IOParse(input: string, type: SigTypes, io: IOTypes) {
         let parsed = input.replace(/\s/g, '').replace(';', '').split(',');
         parsed.forEach(element => {
-            element.match(this.regExPatterns['array']); //this breaks the next line in some situations if commented for some reason.
+            let matchLength = element.match(this.regExPatterns['array']);
             let array = this.regExPatterns['array'].exec(element);
-            if (array) {
+            if (array && matchLength) {
                 let sigName = element.split('[',)[0];
                 let tempArrayLength = array[1];
                 let arrayLength;
     
                 //special case for string/buffer input size vs full array size
-                if(type===SigTypes.string && io === IOTypes.input && array.length === 1) {
+                if(type===SigTypes.string && io === IOTypes.input && matchLength.length === 1) {
                     this.myInputSignals.push({
                         'name': sigName,
                         'type': type,

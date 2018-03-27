@@ -46,16 +46,8 @@ export function activate(context: vscode.ExtensionContext) {
             }
         }
         private extractVisualizer(): string {
-            // let readResource = (filename: string) => fs.readFileSync(path.join(__dirname, "..", "resources", filename), "UTF-8");
-            // let viewer = readResource("test.html");
-            // return viewer;
             let parser = new svg.VisualizerParse();
             parser.parseSimplPlus();
-
-            // console.log(parser.myConstants);
-            // console.log(parser.myInputSignals);
-            // console.log(parser.myOutputSignals);
-            // console.log(parser.myParameters);
 
             let viewer = new svg.SVGCreator(parser);
             return viewer.returnSVG();
@@ -75,6 +67,20 @@ export function activate(context: vscode.ExtensionContext) {
     }
     let provider = new TextDocumentContentProvider();
     let registration = vscode.workspace.registerTextDocumentContentProvider('simpl-visualize', provider);
+
+    vscode.workspace.onDidChangeTextDocument((e: vscode.TextDocumentChangeEvent) => {
+        if (vscode.window.activeTextEditor && e.document === vscode.window.activeTextEditor.document){
+			provider.update(previewUri);
+		}
+	});
+
+	vscode.window.onDidChangeTextEditorSelection((e: vscode.TextEditorSelectionChangeEvent) => {
+		if (e.textEditor === vscode.window.activeTextEditor) {
+			provider.update(previewUri);
+		}
+	})
+
+
 
     let series3_compile = vscode.commands.registerCommand('extension.simplCC_Series3', () => {
         processSimpl("\\target series3");
