@@ -78,7 +78,7 @@ export function activate(context: vscode.ExtensionContext) {
 		if (e.textEditor === vscode.window.activeTextEditor) {
 			provider.update(previewUri);
 		}
-	})
+	});
 
 
 

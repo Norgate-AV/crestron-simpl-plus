@@ -15,7 +15,8 @@ This extension contributes the following commands:
 * `extension.simplCC_Series3`: Compiles the currently opened file if it is a SIMPL+ .usp. Targeted at the 3series processors.
 * `extension.simplCC_Series2and3`: Compiles the currently opened file if it is a SIMPL+ .usp. Targeted at both the 2series and 3series processors.
 * `extension.simplCC_Series3All`: Finds all .usp files in the open folder and compiles them all. Targeted at 3series processors only.
-* `extension.simpl_help`: Opens the Crestron SIMPL+ help reference file. 
+* `extension.simpl_help`: Opens the Crestron SIMPL+ help reference file.
+* `extension.simpl_visualize`: Opens a preview window and lets you preview the signal layout in real time. Note: this will automatically fully expand your module signals to their maximum available size.
 
 ## Extension Settings
 
@@ -42,6 +43,9 @@ So users can utilize their own snippets if desired, code snippets are available 
 N/A
 
 ## Release Notes
+
+### 1.2.0
+Added Simpl module visualizer.
 
 ### 1.1.0
 

@@ -2,7 +2,7 @@
     "name": "crestron-simpl-plus",
     "displayName": "Crestron Simpl+",
     "description": "Extension for Crestron SIMPL+. Includes syntax highlighting and compiler access.",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "publisher": "mwgustin",
     "repository": {
         "type": "git",
@@ -145,9 +145,6 @@
         "watch": "tsc -watch -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
-    },
-    "dependencies": {
-        "file-url": "^1.1.0"
     },
     "devDependencies": {
         "typescript": "^2.6.1",
