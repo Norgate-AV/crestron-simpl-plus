@@ -173,7 +173,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?i)\s*(function|string_function|integer_function|push|change|release|event|eventhandler|callback function|socketconnect)\s+(\b[a-z0-9_]*\b)</string>
+			<string>(?i)\s*(function|string_function|integer_function|push|change|release|event|eventhandler|callback function|)\s+(\b[a-z0-9_]*\b)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -358,6 +358,15 @@
 					<string>Crestron Variable Types</string>
 					<key>match</key>
 					<string>(?i)\b(integer|long_integer|signed_integer|signed_long_integer|string|structure)\b</string>
+					<key>name</key>
+					<string>storage.type.usp</string>
+				</dict>
+				
+				<dict>
+					<key>comment</key>
+					<string>Crestron Threadafe</string>
+					<key>match</key>
+					<string>(?i)\b(threadsafe)\b</string>
 					<key>name</key>
 					<string>storage.type.usp</string>
 				</dict>
