@@ -52,7 +52,9 @@ export class SVGCreator {
 
         for (let i = 0; i < this.parser.myParameters.length; i++) {
             const element = this.parser.myParameters[i];
-            this.createParam(this.sigSpacing*i, element);
+            if (element !== "_skip_"){
+                this.createParam(this.sigSpacing*i, element);
+            }
         }
 
         for (let i = 0; i < this.parser.myInputSignals.length; i++) {
@@ -189,10 +191,45 @@ export class VisualizerParse {
 
     private paramParse(input: RegExpMatchArray){
         input.forEach(element => {
+            let type = this.regExPatterns['paramType'].exec(element);
             let parsed = element.replace(this.regExPatterns['paramType'], '');
             let filtered = parsed.replace(/\s/g, '').replace(';','').split(',');
             filtered.forEach(item => {
-                this.myParameters.push(item);
+                // this.myParameters.push(item);
+
+                let matchLength = item.match(this.regExPatterns['array']);
+                let array = this.regExPatterns['array'].exec(item);
+                if (array && matchLength && type) {
+                    let paramName = item.split('[',)[0];
+                    let tempArrayLength = array[1];
+                    let arrayLength;
+                    //special case for a singular string parameter... size vs array
+                    if(type[1].match(/string_parameter/gi) && matchLength.length === 1) {
+                        this.myParameters.push(paramName);
+                    }
+                    else {
+                        if (isNaN(Number(tempArrayLength))) {
+                            //handle if constant is mistyped or otherwise doesn't exist.
+                            if (typeof this.myConstants[tempArrayLength] !== 'undefined'){
+                                arrayLength = this.myConstants[tempArrayLength];
+                            }
+                            else {
+                                arrayLength = 1;
+                                paramName += `[${tempArrayLength}]`;
+                            }
+                        }
+                        else {
+                            arrayLength = tempArrayLength;
+                        }
+
+                        for (let i = 0; i < arrayLength; i++) {
+                            this.myParameters.push(paramName+`[${i+1}]`);                        
+                        }
+                    }
+                }
+                else {
+                    this.myParameters.push(item);
+                }
             });
         });
     }
