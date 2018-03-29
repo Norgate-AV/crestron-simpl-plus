@@ -114,7 +114,7 @@ export class VisualizerParse {
     public myOutputSignals: SimplSignal[] = [];
     public myParameters: string[] = [];
     public myConstants: Constant = {};
-
+    public myOutputShift: Number = 0;
     private myRegExSignals: RegExSignals[] = [];
 
     private regExPatterns = {
@@ -133,6 +133,7 @@ export class VisualizerParse {
         'paramFull':    /(?:integer_parameter|long_integer_parameter|signed_integer_parameter|signed_long_integer_parameter|string_parameter)([\S\s]*?)(;)/gmi,
         'paramType':    /(integer_parameter|long_integer_parameter|signed_integer_parameter|signed_long_integer_parameter|string_parameter)/gmi,
         'constants':    /#DEFINE_CONSTANT(.*?)(?=\r\n)/g,
+        'outputShift':  /#OUTPUT_SHIFT(.*?)(?=\r\n)/gmi,
     };
 
 
@@ -162,6 +163,20 @@ export class VisualizerParse {
                     let myConst = element.replace(this.regExPatterns['constants'], '$1').split(/\s+/g);
                     this.myConstants[myConst[1]] = myConst[2];
                 });
+            }
+
+            //handle #output_shift compiler directive 
+            let shift = filtered.match(this.regExPatterns['outputShift']);
+            if (shift) {
+                shift.forEach(element => {
+                    this.myOutputShift = Number(element.replace(this.regExPatterns['outputShift'], '$1').split(/\s+/g)[1]);
+                });
+            }
+            for (let i = 0; i < this.myOutputShift; i++) {               
+                let sig = {name: '', type: SigTypes._skip_};
+                // this.myInputSignals.push(sig);
+                //only shifts output.
+                this.myOutputSignals.push(sig);             
             }
 
 
