@@ -47,18 +47,17 @@ N/A
 
 ### 1.2.1
 
-Add 'threadsafe' to syntax detection.  
-Handle '#output_shift' compiler directive in visualizer.
+- Add 'threadsafe' to syntax detection.
+- Handle '#output_shift' compiler directive in visualizer.
 
 ### 1.2.0
 
-Added Simpl module visualizer.
+- Added Simpl module visualizer.
 
 ### 1.1.0
 
-Remove snippets. Snippets are now available in mwgustin.crestron-simpl-plus-snippets
+- Remove snippets. Snippets are now available in mwgustin.crestron-simpl-plus-snippets
 
 ### 1.0.0
 
-Initial release 
-
+- Initial release
