@@ -36,6 +36,7 @@ All commands are added to the right click context menu of the editor tab, and th
 * `ctrl+shift+F12`: Compiles all .usp files in the open working folder for Series3.
 
 ## Snippets
+
 So users can utilize their own snippets if desired, code snippets are available in a separate extension named "Crestron Simpl+ Code Snippets".
 
 ## Known Issues
@@ -44,7 +45,13 @@ N/A
 
 ## Release Notes
 
+### 1.2.1
+
+Add 'threadsafe' to syntax detection.  
+Handle '#output_shift' compiler directive in visualizer.
+
 ### 1.2.0
+
 Added Simpl module visualizer.
 
 ### 1.1.0
