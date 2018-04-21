@@ -1,0 +1,84 @@
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+#DEFINE_CONSTANT MAXIO 16
+#OUTPUT_SHIFT 5
+
+
+#USER_SIMPLSHARP_LIBRARY "Unified"
+
+#HELP_BEGIN
+adlkjdljg
+#HELP_END
+//#USER_SIMPLSHARP_LIBRARY "LibraryName"
+
+
+DIGITAL_INPUT 
+_skip_,_skip_,do_something,
+do_something_else,_skip_,
+many_things[MAXIO],
+_skip_,
+many_more_things[10];
+ANALOG_INPUT 
+testAIn[6];
+
+STRING_INPUT 
+test[6][255];
+
+// DIGITAL_OUTPUT
+// DI[MAXIO]; 
+ANALOG_OUTPUT 
+output[MAXIO];
+//STRING_OUTPUT 
+
+
+integer_function fnSomeFunction(integer x) {
+
+}
+
+
+
+integer_parameter size;
+// string_parameter name[MAXIO][255];
+// integer_parameter _skip_, newNumber;
+
+
+PUSH do_something
+{
+    string abcd;
+    abcd = "dfljdlkjf"
+
+    integer variableName;
+    
+    for(variableName = value to limit)
+    {
+       //code here
+    }
+
+    fnSomeFunction(1234);
+    a = fnSomeFunction(1234);
+
+}
+
+
+
+
+
+/*******************************************************************************************
+Main()
+Uncomment and place one-time startup code here
+(This code will get called when the system starts up)
+*******************************************************************************************/
+
+Function Main()
+{
+    // TODO:  Add code here
+    // Initialize declared global and local variables/arrays as needed.
+
+    // WaitForInitializationComplete();
+    // If you are reading any Input or Output variables, uncomment
+    //   the WaitForInitializationComplete statement above and read
+    //   them afterwards.  Input/Output variables will not have
+    //   their correct values set until after the logic processor
+    //   runs and propagates the values to them.
+}
