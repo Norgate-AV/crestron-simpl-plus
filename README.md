@@ -45,6 +45,12 @@ N/A
 
 ## Release Notes
 
+### 1.2.2
+
+- Big improvements to syntax detection. (Function highlighting, signal name highlighting, etc)
+- Various Syntax related bug fixes (special characters breaking string detection, improper highlighting, etc)
+
+
 ### 1.2.1
 
 - Add 'threadsafe' to syntax detection.

@@ -2,25 +2,25 @@
 #ENABLE_STACK_CHECKING
 #ENABLE_TRACE
 #DEFINE_CONSTANT MAXIO 16
+#DEFINE_CONSTANT TESTSTRING "testing"
 #OUTPUT_SHIFT 5
 
-
-#USER_SIMPLSHARP_LIBRARY "Unified"
-
-#HELP_BEGIN
-adlkjdljg
+#HELP_BEGIN 
+This is help information.
 #HELP_END
-//#USER_SIMPLSHARP_LIBRARY "LibraryName"
+
+
+#USER_SIMPLSHARP_LIBRARY "LibraryName"
 
 
 DIGITAL_INPUT 
 _skip_,_skip_,do_something,
 do_something_else,_skip_,
-many_things[MAXIO],
+//many_things[MAXIO],
 _skip_,
 many_more_things[10];
-ANALOG_INPUT 
-testAIn[6];
+
+ANALOG_INPUT testAIn[6];
 
 STRING_INPUT 
 test[6][255];
@@ -32,11 +32,20 @@ output[MAXIO];
 //STRING_OUTPUT 
 
 
-integer_function fnSomeFunction(integer x) {
 
+integer_function fnSomeFunction(integer x) {
+    string a[100];
+    a = "this is a test string";
+    a = "\"" + "abdf" + itoa(123) + "dfj\";lj//adflkj{%s}" + TESTSTRING;
+    a = "{" + "}";
+    return(1);
 }
 
 
+// callback function fnCallbackFunc () {
+//     fnSomeFunction(1);
+//     a = fnSomeFunction(1);
+// }
 
 integer_parameter size;
 // string_parameter name[MAXIO][255];
@@ -45,17 +54,17 @@ integer_parameter size;
 
 PUSH do_something
 {
-    string abcd;
-    abcd = "dfljdlkjf"
-
+    string abcd[100];
+    integer a;
     integer variableName;
+    abcd = "dfljdlkjf";
+
     
-    for(variableName = value to limit)
+    for(variableName = 10 to 11)
     {
        //code here
     }
-
-    fnSomeFunction(1234);
+    a = MAXIO;
     a = fnSomeFunction(1234);
 
 }

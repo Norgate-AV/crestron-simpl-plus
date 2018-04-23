@@ -209,6 +209,7 @@ export class VisualizerParse {
             let type = this.regExPatterns['paramType'].exec(element);
             let parsed = element.replace(this.regExPatterns['paramType'], '');
             let filtered = parsed.replace(/\s/g, '').replace(';','').split(',');
+            
             filtered.forEach(item => {
                 // this.myParameters.push(item);
 
