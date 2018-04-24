@@ -132,7 +132,7 @@ export class VisualizerParse {
         'allIO':		/(DIGITAL_INPUT|ANALOG_INPUT|STRING_INPUT|BUFFER_INPUT|DIGITAL_OUTPUT|ANALOG_OUTPUT|STRING_OUTPUT)([\S\s]*?)(;)/gmi,
         'paramFull':    /(?:integer_parameter|long_integer_parameter|signed_integer_parameter|signed_long_integer_parameter|string_parameter)([\S\s]*?)(;)/gmi,
         'paramType':    /(integer_parameter|long_integer_parameter|signed_integer_parameter|signed_long_integer_parameter|string_parameter)/gmi,
-        'constants':    /#DEFINE_CONSTANT(.*?)(?=\r\n)/g,
+        'constants':    /#DEFINE_CONSTANT(.*?)(?=\r\n)/gi,
         'outputShift':  /#OUTPUT_SHIFT(.*?)(?=\r\n)/gmi,
     };
 
@@ -161,9 +161,10 @@ export class VisualizerParse {
             if(constants) {
                 constants.forEach(element => {
                     let myConst = element.replace(this.regExPatterns['constants'], '$1').split(/\s+/g);
-                    this.myConstants[myConst[1]] = myConst[2];
+                    this.myConstants[myConst[1].toLowerCase()] = myConst[2];
                 });
             }
+            console.log(this.myConstants);
 
             //handle #output_shift compiler directive 
             let shift = filtered.match(this.regExPatterns['outputShift']);
@@ -226,8 +227,8 @@ export class VisualizerParse {
                     else {
                         if (isNaN(Number(tempArrayLength))) {
                             //handle if constant is mistyped or otherwise doesn't exist.
-                            if (typeof this.myConstants[tempArrayLength] !== 'undefined'){
-                                arrayLength = this.myConstants[tempArrayLength];
+                            if (typeof this.myConstants[tempArrayLength.toLowerCase()] !== 'undefined'){
+                                arrayLength = this.myConstants[tempArrayLength.toLowerCase()];
                             }
                             else {
                                 arrayLength = 1;
@@ -271,8 +272,8 @@ export class VisualizerParse {
                     //if array length is a constant isntead of number
                     if (isNaN(Number(tempArrayLength))){
                         //handle if constant is mistyped or otherwise doesn't exist.
-                        if (typeof this.myConstants[tempArrayLength] !== 'undefined'){
-                            arrayLength = this.myConstants[tempArrayLength];
+                        if (typeof this.myConstants[tempArrayLength.toLowerCase()] !== 'undefined'){
+                            arrayLength = this.myConstants[tempArrayLength.toLowerCase()];
                         }
                         else {
                             arrayLength = 1;
