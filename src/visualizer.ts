@@ -147,61 +147,68 @@ export class VisualizerParse {
         this.myRegExSignals.push( {pattern: this.regExPatterns['bufferIn'], type: SigTypes.string, io: IOTypes.input });
     }
 
-    public parseSimplPlus(){
+    public setFileText() {
         const editor = vscode.window.activeTextEditor;
         if(editor) {
             this.fileText = editor.document.getText();
-
-            let filtered = this.fileText.replace(this.regExPatterns['blockComment'], '');
-            filtered = filtered.replace(this.regExPatterns['comment'], '');
-            filtered = filtered.replace(this.regExPatterns['arrayCommas'], '[$1]');
-
-            //constants
-            let constants = filtered.match(this.regExPatterns['constants']);
-            if(constants) {
-                constants.forEach(element => {
-                    let myConst = element.replace(this.regExPatterns['constants'], '$1').split(/\s+/g);
-                    this.myConstants[myConst[1].toLowerCase()] = myConst[2];
-                });
-            }
-            console.log(this.myConstants);
-
-            //handle #output_shift compiler directive 
-            let shift = filtered.match(this.regExPatterns['outputShift']);
-            if (shift) {
-                shift.forEach(element => {
-                    this.myOutputShift = Number(element.replace(this.regExPatterns['outputShift'], '$1').split(/\s+/g)[1]);
-                });
-            }
-            for (let i = 0; i < this.myOutputShift; i++) {               
-                let sig = {name: '', type: SigTypes._skip_};
-                // this.myInputSignals.push(sig);
-                //only shifts output.
-                this.myOutputSignals.push(sig);             
-            }
-
-
-            //separate out ot each group in order
-            let parsedAll = filtered.match(this.regExPatterns['allIO']);
-
-            //if we find, then go through each group and parse the specific element and add to main IO
-            if (parsedAll) {
-                parsedAll.forEach(element => {
-                    //do this better eventually
-                    this.myRegExSignals.forEach(regExSig => {
-                        let sig = regExSig.pattern.exec(element);
-                        if (sig) {
-                            this.IOParse(sig[1], regExSig.type, regExSig.io);
-                        }
-                    });
-                });
-            }
-
-            let param;
-            if(param = filtered.match(this.regExPatterns['paramFull'])){
-                this.paramParse(param);
-            }
         }
+    }
+
+    public parseSimplPlus() {
+        this.setFileText();
+        this.parseFileText();
+    }
+
+    public parseFileText(){        
+        let filtered = this.fileText.replace(this.regExPatterns['blockComment'], '');
+        filtered = filtered.replace(this.regExPatterns['comment'], '');
+        filtered = filtered.replace(this.regExPatterns['arrayCommas'], '[$1]');
+
+        //constants
+        let constants = filtered.match(this.regExPatterns['constants']);
+        if(constants) {
+            constants.forEach(element => {
+                let myConst = element.replace(this.regExPatterns['constants'], '$1').split(/\s+/g);
+                this.myConstants[myConst[1].toLowerCase()] = myConst[2];
+            });
+        }
+
+        //handle #output_shift compiler directive 
+        let shift = filtered.match(this.regExPatterns['outputShift']);
+        if (shift) {
+            shift.forEach(element => {
+                this.myOutputShift = Number(element.replace(this.regExPatterns['outputShift'], '$1').split(/\s+/g)[1]);
+            });
+        }
+        for (let i = 0; i < this.myOutputShift; i++) {               
+            let sig = {name: '', type: SigTypes._skip_};
+            // this.myInputSignals.push(sig);
+            //only shifts output.
+            this.myOutputSignals.push(sig);             
+        }
+
+
+        //separate out ot each group in order
+        let parsedAll = filtered.match(this.regExPatterns['allIO']);
+
+        //if we find, then go through each group and parse the specific element and add to main IO
+        if (parsedAll) {
+            parsedAll.forEach(element => {
+                //do this better eventually
+                this.myRegExSignals.forEach(regExSig => {
+                    let sig = regExSig.pattern.exec(element);
+                    if (sig) {
+                        this.IOParse(sig[1], regExSig.type, regExSig.io);
+                    }
+                });
+            });
+        }
+
+        let param;
+        if(param = filtered.match(this.regExPatterns['paramFull'])){
+            this.paramParse(param);
+        }
+        
         
     }
 
