@@ -2,7 +2,11 @@
 
 All notable changes to the "crestron-simpl-plus" extension will be documented in this file.
 
-### 1.2.2
+## 1.2.3
+
+- Minor additional syntax highlighting improvements.
+
+## 1.2.2
 
 - Big improvements to syntax detection. (Function highlighting, signal name highlighting, etc)
 - Various Syntax related bug fixes (special characters breaking string detection, improper highlighting, etc)

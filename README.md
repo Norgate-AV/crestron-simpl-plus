@@ -45,6 +45,11 @@ N/A
 
 ## Release Notes
 
+### 1.2.3
+
+- Minor additional syntax highlighting improvements.
+
+
 ### 1.2.2
 
 - Big improvements to syntax detection. (Function highlighting, signal name highlighting, etc)
