@@ -18,11 +18,13 @@ This is help information.
 DIGITAL_INPUT 
 _skip_,_skip_,do_something,
 do_something_else,_skip_,
-many_things[MAXIO],
-_skip_,
+many_things[MAXIO];
+DIGITAL_INPUT _skip_,
 many_more_things[SOME_MORE];
+DIGITAL_INPUT testing_again[MAXIO];
 
 ANALOG_INPUT testAIn[6];
+ANALOG_INPUT _skip_, moreAIn[SOME_MORE], _skip_;
 
 STRING_INPUT 
 test[6][255];
