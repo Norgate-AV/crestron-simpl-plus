@@ -13,14 +13,15 @@
         "vscode": "^1.20.0"
     },
     "categories": [
-        "Languages"
+        "Programming Languages"
     ],
     "activationEvents": [
         "onCommand:extension.simplCC_Series3",
         "onCommand:extension.simplCC_Series2and3",
         "onCommand:extension.simplCC_Series3All",
         "onCommand:extension.simpl_help",
-        "onCommand:extension.simpl_visualize"
+        "onCommand:extension.simpl_visualize",
+        "onCommand:extension.simplCC_API"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -44,6 +45,10 @@
             {
                 "command": "extension.simpl_visualize",
                 "title": "Visualize SIMPL+ module."
+            },
+            {
+                "command": "extension.simplCC_API",
+                "title": "Simpl# API"
             }
         ],
         "configuration": [
@@ -94,6 +99,11 @@
                     "when": "resourceLangId == simpl+",
                     "command": "extension.simpl_visualize",
                     "group": "navigation"
+                },
+                {
+                    "when": "resourceLangId == simpl+",
+                    "command": "extension.simplCC_API",
+                    "group": "navigation"
                 }
             ]
         },
@@ -130,6 +140,15 @@
                     ".usp"
                 ],
                 "configuration": "./language-configuration.json"
+            },
+            {
+                "id": "simpl#_api",
+                "aliases": [
+                    "Simpl Sharp"
+                ],
+                "extensions": [
+                    ".api"
+                ]
             }
         ],
         "grammars": [
@@ -137,6 +156,11 @@
                 "language": "simpl+",
                 "scopeName": "source.usp",
                 "path": "./syntaxes/crestron-simpl-plus.tmLanguage.json"
+            },
+            {
+                "language": "simpl#_api",
+                "scopeName": "source.api",
+                "path": "./syntaxes/crestron-simpl-sharp.tmLanguage.json"
             }
         ]
     },

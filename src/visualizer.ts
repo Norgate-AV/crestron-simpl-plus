@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { filterComments } from './utils';
 
 
 export class SVGCreator {
@@ -120,8 +121,6 @@ export class VisualizerParse {
     private regExPatterns = {
         'array':        /\[(.+?)\]/gim,
         'arrayCommas':  /\[([^\[\]]*?),([^\]\]]*?)\]/gim,
-        'comment':    /(\/\/)(.*?)(?=\r\n)/g,
-        'blockComment': /(\/\*)([\S\s]*?)(\*\/)/g,
         'digitalIn':    /DIGITAL_INPUT([\S\s]*?)(?=;)/mi,
         'digitalOut':   /DIGITAL_OUTPUT([\S\s]*?)(?=;)/mi,
         'analogIn':     /ANALOG_INPUT([\S\s]*?)(?=;)/mi,
@@ -160,8 +159,8 @@ export class VisualizerParse {
     }
 
     public parseFileText(){        
-        let filtered = this.fileText.replace(this.regExPatterns['blockComment'], '');
-        filtered = filtered.replace(this.regExPatterns['comment'], '');
+        let filtered;
+        filtered = filterComments(this.fileText);
         filtered = filtered.replace(this.regExPatterns['arrayCommas'], '[$1]');
 
         //constants

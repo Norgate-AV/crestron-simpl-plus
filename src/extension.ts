@@ -6,6 +6,10 @@ import * as vscode from 'vscode';
 // import * as path from "path";
 
 import * as svg from "./visualizer";
+import * as api from "./api";
+// import { stat } from 'fs';
+// import { getSimplSharpLibraries } from './api-util';
+// import { stat } from 'fs';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -127,11 +131,21 @@ export function activate(context: vscode.ExtensionContext) {
         
     });
 
+    let open_api = vscode.commands.registerCommand("extension.simplCC_API", () => {
+
+        let editor = vscode.window.activeTextEditor;
+        if (editor) {
+            let newAPI = new api.API(editor);
+            newAPI.openAPIFiles();
+        }
+    });
+
     context.subscriptions.push(series3_compile);
     context.subscriptions.push(series2and3_compile);
     context.subscriptions.push(series3_compileAll);
     context.subscriptions.push(help_command);
     context.subscriptions.push(simpl_visualize);
+    context.subscriptions.push(open_api);
     context.subscriptions.push(registration);
 }
 
