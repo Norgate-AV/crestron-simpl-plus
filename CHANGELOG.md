@@ -2,6 +2,12 @@
 
 All notable changes to the "crestron-simpl-plus" extension will be documented in this file.
 
+## 1.3.0
+
+- Added support for opening and generating Simpl# API files.
+- Syntax highlighting for Simpl# API files.
+- Fixed an issue in the visualizer with multiple signal detection.
+
 ## 1.2.3
 
 - Minor additional syntax highlighting improvements.

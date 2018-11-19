@@ -41,9 +41,15 @@ So users can utilize their own snippets if desired, code snippets are available 
 
 ## Known Issues
 
-N/A
+* API files - if CLZ is recently generated, the API file opened or generated may not be the newest available. If this happens, try a compile and then attempt opening the API file again.
 
 ## Release Notes
+
+### 1.3.0
+
+- Added support for opening and generating Simpl# API files.
+- Syntax highlighting for Simpl# API files.
+- Fixed an issue in the visualizer with multiple signal detection.
 
 ### 1.2.3
 
