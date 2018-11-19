@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { filterComments } from './utils';
 import { join, dirname } from 'path';
-import { existsSync, exists, statSync } from 'fs';
+import { existsSync, statSync } from 'fs';
 
 
 
