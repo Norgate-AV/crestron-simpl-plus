@@ -87,7 +87,7 @@ export class API {
         if (existsSync(dll) && existsSync(exe)) {
             let term = vscode.window.createTerminal('simplHeader', vscode.workspace.getConfiguration("simpl").terminalLocation);
             term.show();
-            term.sendText(exe + ' ' + dll + ' ' + api);
+            term.sendText('"' + exe + '" "' + dll + '" "' + api + '"');
             return true;
         }
         return false;
