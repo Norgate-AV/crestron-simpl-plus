@@ -73,7 +73,7 @@
 
         },
         {
-            "begin": "(?i)\\s*(function|string_function|integer_function|push|change|release|event|eventhandler|callback function)\\s+(\\b[a-z0-9_]*\\b)",
+            "begin": "(?i)\\s*(function|string_function|integer_function|push|change|release|event|eventhandler|callback function|callback integer_function|callback string_function)\\s+(\\b[a-z0-9_\\-\\$]*)",
             "beginCaptures": {
                 "1": {
                     "name": "keyword.other.function.usp"

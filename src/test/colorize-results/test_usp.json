@@ -245,9 +245,9 @@
 		"c": "//",
 		"t": "source.usp comment.line.double-slash comment",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -256,9 +256,9 @@
 		"c": " #USER_SIMPLSHARP_LIBRARY \"LibraryName\"",
 		"t": "source.usp comment.line.double-slash",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -542,9 +542,9 @@
 		"c": "//",
 		"t": "source.usp comment.line.double-slash comment",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -553,9 +553,9 @@
 		"c": " DIGITAL_OUTPUT",
 		"t": "source.usp comment.line.double-slash",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -564,9 +564,9 @@
 		"c": "//",
 		"t": "source.usp comment.line.double-slash comment",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -575,9 +575,9 @@
 		"c": " DI[MAXIO]; ",
 		"t": "source.usp comment.line.double-slash",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -630,9 +630,9 @@
 		"c": "//",
 		"t": "source.usp comment.line.double-slash comment",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -641,9 +641,9 @@
 		"c": "STRING_OUTPUT ",
 		"t": "source.usp comment.line.double-slash",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -851,7 +851,7 @@
 		"t": "source.usp string.quoted.double.usp constant.character.escape.usp",
 		"r": {
 			"dark_plus": "constant.character.escape: #D7BA7D",
-			"light_plus": "constant.character.escape: #A31515",
+			"light_plus": "constant.character.escape: #FF0000",
 			"dark_vs": "string: #CE9178",
 			"light_vs": "string: #A31515",
 			"hc_black": "constant.character: #569CD6"
@@ -994,7 +994,7 @@
 		"t": "source.usp string.quoted.double.usp constant.character.escape.usp",
 		"r": {
 			"dark_plus": "constant.character.escape: #D7BA7D",
-			"light_plus": "constant.character.escape: #A31515",
+			"light_plus": "constant.character.escape: #FF0000",
 			"dark_vs": "string: #CE9178",
 			"light_vs": "string: #A31515",
 			"hc_black": "constant.character: #569CD6"
@@ -1444,9 +1444,9 @@
 		"c": "//",
 		"t": "source.usp comment.line.double-slash comment",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -1455,9 +1455,9 @@
 		"c": " integer_parameter _skip_, newNumber;",
 		"t": "source.usp comment.line.double-slash",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -1818,9 +1818,9 @@
 		"c": "//",
 		"t": "source.usp comment.line.double-slash comment",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -1829,9 +1829,9 @@
 		"c": "code here",
 		"t": "source.usp comment.line.double-slash",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -1906,9 +1906,9 @@
 		"c": "/*",
 		"t": "source.usp comment.block comment",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -1917,9 +1917,9 @@
 		"c": "******************************************************************************************",
 		"t": "source.usp comment.block",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -1928,9 +1928,9 @@
 		"c": "Main()",
 		"t": "source.usp comment.block",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -1939,9 +1939,9 @@
 		"c": "Uncomment and place one-time startup code here",
 		"t": "source.usp comment.block",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -1950,9 +1950,9 @@
 		"c": "(This code will get called when the system starts up)",
 		"t": "source.usp comment.block",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -1961,9 +1961,9 @@
 		"c": "******************************************************************************************",
 		"t": "source.usp comment.block",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -1972,9 +1972,9 @@
 		"c": "*/",
 		"t": "source.usp comment.block comment",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -2060,9 +2060,9 @@
 		"c": "//",
 		"t": "source.usp comment.line.double-slash comment",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -2071,9 +2071,9 @@
 		"c": " TODO:  Add code here",
 		"t": "source.usp comment.line.double-slash",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -2093,9 +2093,9 @@
 		"c": "//",
 		"t": "source.usp comment.line.double-slash comment",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -2104,9 +2104,9 @@
 		"c": " Initialize declared global and local variables/arrays as needed.",
 		"t": "source.usp comment.line.double-slash",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -2126,9 +2126,9 @@
 		"c": "//",
 		"t": "source.usp comment.line.double-slash comment",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -2137,9 +2137,9 @@
 		"c": " WaitForInitializationComplete();",
 		"t": "source.usp comment.line.double-slash",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -2159,9 +2159,9 @@
 		"c": "//",
 		"t": "source.usp comment.line.double-slash comment",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -2170,9 +2170,9 @@
 		"c": " If you are reading any Input or Output variables, uncomment",
 		"t": "source.usp comment.line.double-slash",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -2192,9 +2192,9 @@
 		"c": "//",
 		"t": "source.usp comment.line.double-slash comment",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -2203,9 +2203,9 @@
 		"c": "   the WaitForInitializationComplete statement above and read",
 		"t": "source.usp comment.line.double-slash",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -2225,9 +2225,9 @@
 		"c": "//",
 		"t": "source.usp comment.line.double-slash comment",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -2236,9 +2236,9 @@
 		"c": "   them afterwards.  Input/Output variables will not have",
 		"t": "source.usp comment.line.double-slash",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -2258,9 +2258,9 @@
 		"c": "//",
 		"t": "source.usp comment.line.double-slash comment",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -2269,9 +2269,9 @@
 		"c": "   their correct values set until after the logic processor",
 		"t": "source.usp comment.line.double-slash",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -2291,9 +2291,9 @@
 		"c": "//",
 		"t": "source.usp comment.line.double-slash comment",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
@@ -2302,9 +2302,9 @@
 		"c": "   runs and propagates the values to them.",
 		"t": "source.usp comment.line.double-slash",
 		"r": {
-			"dark_plus": "comment: #608B4E",
+			"dark_plus": "comment: #6A9955",
 			"light_plus": "comment: #008000",
-			"dark_vs": "comment: #608B4E",
+			"dark_vs": "comment: #6A9955",
 			"light_vs": "comment: #008000",
 			"hc_black": "comment: #7CA668"
 		}
