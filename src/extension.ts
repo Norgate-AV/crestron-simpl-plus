@@ -69,18 +69,26 @@ export function activate(context: vscode.ExtensionContext) {
         
 
     }
+
+    let webPanel: vscode.WebviewPanel | undefined = undefined;
     let provider = new TextDocumentContentProvider();
     let registration = vscode.workspace.registerTextDocumentContentProvider('simpl-visualize', provider);
 
     vscode.workspace.onDidChangeTextDocument((e: vscode.TextDocumentChangeEvent) => {
         if (vscode.window.activeTextEditor && e.document === vscode.window.activeTextEditor.document){
-			provider.update(previewUri);
+            provider.update(previewUri);
+            if(webPanel) {
+                webPanel.webview.html = provider.provideTextDocumentContent(previewUri);
+            }
 		}
 	});
 
 	vscode.window.onDidChangeTextEditorSelection((e: vscode.TextEditorSelectionChangeEvent) => {
 		if (e.textEditor === vscode.window.activeTextEditor) {
-			provider.update(previewUri);
+            provider.update(previewUri);
+            if(webPanel) {
+                webPanel.webview.html = provider.provideTextDocumentContent(previewUri);
+            }
 		}
 	});
 
@@ -113,14 +121,23 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     let simpl_visualize = vscode.commands.registerCommand("extension.simpl_visualize", () => {
-        return vscode.commands.executeCommand('vscode.previewHtml', previewUri, vscode.ViewColumn.Two, 'SIMPL Preview').then((success) => {
-		}, (reason) => {
-			vscode.window.showErrorMessage(reason);
-        });
+        // return vscode.commands.executeCommand('vscode.previewHtml', previewUri, vscode.ViewColumn.Two, 'SIMPL Preview').then((success) => {
+		// }, (reason) => {
+		// 	vscode.window.showErrorMessage(reason);
+        // });
+        if(webPanel){ 
+            webPanel.reveal();
+        }
+        else {
+            webPanel = vscode.window.createWebviewPanel(
+                previewUri.toString(),
+                "Simpl+ Visualizer", 
+                vscode.ViewColumn.Two
+            );
+        }
         
-        // let uri = vscode.Uri.parse('file:///resources/test.html');
-
-        // return vscode.commands.executeCommand('vscode.previewHtml', uri );
+        webPanel.webview.html = provider.provideTextDocumentContent(previewUri);
+        
     });
 
     let help_command = vscode.commands.registerCommand("extension.simpl_help", () => {
