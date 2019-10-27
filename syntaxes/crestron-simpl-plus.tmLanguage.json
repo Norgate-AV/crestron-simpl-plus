@@ -1,6 +1,7 @@
 {
     "fileTypes": [
-        "usp"
+        "usp",
+        "usl"
     ],
     "name": "Crestron",
     "patterns": [

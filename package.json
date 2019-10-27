@@ -2,7 +2,7 @@
     "name": "crestron-simpl-plus",
     "displayName": "Crestron Simpl+",
     "description": "Extension for Crestron SIMPL+. Includes syntax highlighting and compiler access.",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "publisher": "mwgustin",
     "icon": "simpl_plus_icon.png",
     "repository": {
@@ -10,7 +10,7 @@
         "url": "https://gitlab.com/mikegustin/crestron-simpl-plus.git"
     },
     "engines": {
-        "vscode": "^1.20.0"
+        "vscode": "^1.23.0"
     },
     "categories": [
         "Programming Languages"
@@ -137,7 +137,8 @@
                     "simpl+"
                 ],
                 "extensions": [
-                    ".usp"
+                    ".usp",
+                    ".usl"
                 ],
                 "configuration": "./language-configuration.json"
             },
@@ -172,8 +173,8 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6",
+        "typescript": "^2.8.3",
+        "vscode": "^1.1.36",
         "tslint": "^5.8.0",
         "@types/node": "^7.0.43",
         "@types/mocha": "^2.2.42"
