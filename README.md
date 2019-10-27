@@ -45,6 +45,12 @@ So users can utilize their own snippets if desired, code snippets are available 
 
 ## Release Notes
 
+## 1.3.1
+
+- Added new functions, error codes, structures and more to syntax highlighting.
+- Updated dependencies for fix vulnerabilities.
+- Added .usl support.
+
 ### 1.3.0
 
 - Added support for opening and generating Simpl# API files.
