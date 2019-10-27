@@ -73,7 +73,7 @@
 
         },
         {
-            "begin": "(?i)\\s*(function|string_function|integer_function|push|change|release|event|eventhandler|callback function|callback integer_function|callback string_function)\\s+(\\b[a-z0-9_\\-\\$]*)",
+            "begin": "(?i)\\s*(function|string_function|long_integer_function|signed_integer_function|signed_long_integer_function|integer_function|push|change|release|event|eventhandler|callback function|callback signed_integer_function|callback signed_long_integer_function|callback integer_function|callback long_integer_function|callback string_function)\\s+(\\b[a-z0-9_\\-\\$]*)",
             "beginCaptures": {
                 "1": {
                     "name": "keyword.other.function.usp"
@@ -204,12 +204,17 @@
             "patterns": [
                 {
                     "comment": "Crestron Compiler Directives",
-                    "match": "(?i)(#\\b(analog_serial_expand|category|crestron_library|user_simplsharp_library|includepath|default_nonvolatile|default_volatile|digital_expand|enable_dynamic|enable_stack_checking|enable_trace|encoding_ascii|encoding_utf16|encoding_inherit_from_parent|encoding_inherit_from_program|help|help_pdf_file|hint|if_defined|if_not_defined|endif|if_series2|if_series3|large_stack|max_internal_buffer_size|output_shift|print_to_trace|symbol_name|user_library)\\b)",
+                    "match": "(?i)(#\\b(analog_serial_expand|category|crestron_library|user_simplsharp_library|includepath|default_nonvolatile|default_volatile|digital_expand|enable_dynamic|enable_stack_checking|enable_trace|encoding_ascii|encoding_utf16|encoding_inherit_from_parent|encoding_inherit_from_program|help|help_pdf_file|hint|if_defined|if_not_defined|endif|if_series2|if_series3|large_stack|max_internal_buffer_size|output_shift|print_to_trace|symbol_name|user_library|crestron_simplsharp_library|dynamic_initialsize)\\b)",
                     "name": "keyword.other.preprocessor.usp"
                 },
                 {
                     "comment": "Crestron Parameter Properties",
                     "match": "(?i)(#\\b(begin_parameter_properties|end_parameter_properties|begin_prop_full_description|end_prop_full_description|begin_prop_notes|end_prop_notes)\\b)",
+                    "name": "keyword.other.preprocessor.usp"
+                },
+                {
+                    "comment": "Crestron Parameter Properties Attributes",
+                    "match": "(?i)(\\b(propBounds|propDefaultUnit|propDefaultValue|propList|propShortDescription|propValidUnits|unitCharacter|unitDecimal|unitHex|unitPercent|unitString|unitTicks|unitTime)\\b)",
                     "name": "keyword.other.preprocessor.usp"
                 },
                 {
@@ -219,7 +224,7 @@
                 },
                 {
                     "comment": "Crestron I\/O Declarations",
-                    "match": "(?i)\\b(integer_parameter|long_integer_parameter|nonvolatile|signed_integer_parameter|signed_long_integer_parameter|string_parameter|structure|volatile)\\b",
+                    "match": "(?i)\\b(integer_parameter|long_integer_parameter|nonvolatile|signed_integer_parameter|signed_long_integer_parameter|string_parameter|volatile)\\b",
                     "name": "keyword.other.preprocessor.usp"
                 },
                 {
@@ -228,8 +233,18 @@
                     "name": "keyword.other.preprocessor.usp"
                 },
                 {
+                    "comment": "Crestron Socket Error Codes",
+                    "match": "(?i)\\b(SOCKET_INVALID_PORT_NUMBER|SOCKET_INVALID_SOCKET|SOCKET_NO_CONNECT_TASK|SOCKET_NO_DNS_RESOLVE|SOCKET_NOT_CONNECTED|SOCKET_STRING_TOO_SMALL)\\b",
+                    "name": "keyword.other.preprocessor.usp"
+                },
+                {
                     "comment": "Crestron Variable Types",
-                    "match": "(?i)\\b(integer|long_integer|signed_integer|signed_long_integer|string|structure)\\b",
+                    "match": "(?i)\\b(dynamic|integer|long_integer|signed_integer|signed_long_integer|string|structure)\\b",
+                    "name": "storage.type.usp"
+                },
+                {
+                    "comment": "Crestron Variable Reference",
+                    "match": "(?i)\\b(ByVal|ByRef|ReadOnlyByRef)\\b",
                     "name": "storage.type.usp"
                 },
                 {
@@ -263,8 +278,13 @@
                     "name": "support.function.usp"
                 },
                 {
+                    "comment": "Crestron Exception Functions Error Codes",
+                    "match": "(?i)\\b(SPLUS_EXCEPTION_OUT_OF_RANGE|SPLUS_EXCEPTION_UNKNOWN)\\b",
+                    "name": "storage.type.usp"
+                },
+                {
                     "comment": "Crestron Conditionals",
-                    "match": "(?i)\\b(break|cswitch|if|else|switch|do|until|for|while|to)\\b",
+                    "match": "(?i)\\b(break|cswitch|if|else|switch|do|until|for|while|to|continue|step)\\b",
                     "name": "keyword.control.usp"
                 },
                 {
@@ -279,12 +299,12 @@
                 },
                 {
                     "comment": "Crestron CEN-OEM Functions",
-                    "match": "(?i)\\b(_oem_break|_oem_cd|_oem_cts|_oem_dtr|_oem_long_break|_oem_max_string|_oem_pacing|_oem_rts|_oem_str_in|_oem_str_out)\\b",
+                    "match": "(?i)\\b(_oem_break|_oem_cd|_oem_cts|_oem_dtr|_oem_long_break|_oem_max_string|_oem_pacing|_oem_rts|_oem_str_in|_oem_str_out|_oem_cold_reset|_oem_command|_oem_command_response|_oem_from_web|_oem_main_break|_oem_main_cd|_oem_main_cts|_oem_main_dtr|_oem_main_long_break|_oem_main_max_string|_oem_main_pacing|_oem_main_rts|_oem_to_web|_oem_warm_reset)\\b",
                     "name": "support.function.cen-oem.usp"
                 },
                 {
                     "comment": "Crestron Data Conversion Functions",
-                    "match": "(?i)\\b(atoi|atol|chr|HexToI|HexToL|HexToSI|HexToSL|itoa|itohex|ltoa|ltohex)\\b",
+                    "match": "(?i)\\b(atoi|atol|atosi|atosl|chr|HexToI|HexToL|HexToSI|HexToSL|itoa|itohex|ltoa|ltohex)\\b",
                     "name": "support.function.usp"
                 },
                 {
@@ -298,24 +318,59 @@
                     "name": "support.function.usp"
                 },
                 {
+                    "comment": "Crestron Email Functions Error Codes",
+                    "match": "(?i)\\b(SMTP_OK|SMTP_ERROR_FATAL|SMTP_ERROR_ILLEGAL_CMD|SMTP_ERROR_CONNECT|SMTP_ERROR_SEND|SMTP_ERROR_RECV|SMTP_ERROR_NU_CONNECT|SMTP_ERROR_NU_BUFFERS|SMTP_ERROR_AUTHENTICATION|SMTP_ERROR_AUTH_LOGIN_UNSUPPORTED|SMTP_INV_PARAM|SMTP_ETHER_NOT_ENABLED|SMTP_NO_SERVER_ADDRESS|SMTP_SEND_FAILURE|IDS_SMTP_FAILURE_MAIL_COMMAND|SMTP_FAILURE_TO_RCPT_COMMAND|SMTP_FAILURE_CC_RCPT_COMMAND|SMTP_FAILURE_DATA_COMMAND|SMTP_FAILURE_ATTACHMENT_OPEN)\\b",
+                    "name": "support.type.usp"
+                },
+                {
                     "comment": "Crestron Encoding Functions",
-                    "match": "(?i)\\b(ascii|GetEncoding|SetEncoding|Inherit|ToASCII)\\b",
+                    "match": "(?i)\\b(ascii|GetEncoding|SetEncoding|Inherit|ToASCII|ToUTF16)\\b",
                     "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron GetEncoding Constants",
+                    "match": "(?i)\\b(encoding_ascii|encoding_utf16|encoding_inherit)\\b",
+                    "name": "storage.type.usp"
                 },
                 {
                     "comment": "Crestron File Functions",
-                    "match": "(?i)\\b(file_info|FileBOF|FileClose|FileDelete|FileDeleteShared|FileEOF|FileLength|FileOpen|FileOpenShared|FileRead|FileSeek|FileWrite|FindClose|FindFirst|FindFirstShared|FindNext|GetCurrentDirectory|IsDirectory|IsHidden|IsReadOnly|IsSystem|IsVolume|MakeDirectory|MakeDirectoryShared|ReadInteger|ReadIntegerArray|ReadLongInteger|ReadLongIntegerArray|ReadSignedInteger|ReadSignedIntegerArray|ReadSignedLongInteger|ReadSignedLongIntegerArray|ReadString|ReadStringArray|ReadStructure|RemoveDirectory|RemoveDirectoryShared|SetCurrentDirectory|StartFileOperations|WaitForNewDisk|WriteInteger|WriteIntegerArray|WriteLongInteger|WriteLongIntegerArray|WriteSignedInteger|WriteSignedIntegerArray|WriteSignedLongInteger|WriteSignedLongIntegerArray|WriteString|WriteStringArray|WriteStructure)\\b",
+                    "match": "(?i)\\b(EndFileOperations|FileBOF|FileClose|FileDelete|FileDeleteShared|FileEOF|FileLength|FileOpen|FileOpenShared|FileRead|FileSeek|FileWrite|FindClose|FindFirst|FindFirstShared|FindNext|GetCurrentDirectory|IsDirectory|IsHidden|IsReadOnly|IsSystem|IsVolume|MakeDirectory|MakeDirectoryShared|ReadInteger|ReadIntegerArray|ReadLongInteger|ReadLongIntegerArray|ReadSignedInteger|ReadSignedIntegerArray|ReadSignedLongInteger|ReadSignedLongIntegerArray|ReadString|ReadStringArray|ReadStructure|RemoveDirectory|RemoveDirectoryShared|SetCurrentDirectory|StartFileOperations|WaitForNewDisk|WriteInteger|WriteIntegerArray|WriteLongInteger|WriteLongIntegerArray|WriteSignedInteger|WriteSignedIntegerArray|WriteSignedLongInteger|WriteSignedLongIntegerArray|WriteString|WriteStringArray|WriteStructure|CheckForDisk|CheckForNVRamDisk)\\b",
                     "name": "support.function.usp"
                 },
                 {
+                    "comment": "Crestron File Functions Error Codes",
+                    "match": "(?i)\\b(FILE_BAD_USER|FILE_NO_DISK|FILE_LONGPATH|FILE_INVNAME|FILE_PEMFILE|FILE_BADFILE|FILE_ACCES|FILE_NOSPC|FILE_SHARE|FILE_NOFILE|FILE_EXIST|FILE_NVALFP|FILE_MAXFILE_SIZE|FILE_NOEMPTY|FILE_INVPARM|FILE_INVPARCMB|FILE_NO_MEMORY|FILE_NO_BLOCK|FILE_NO_FINODE|FILE_NO_DROBJ|FILE_IO_ERROR|FILE_INTERNAL|FILE_UNAUTH|FILE_TYPEUNSUPP|FILE_INVENC|FILE_BINERR|FILE_CORRUPT|FILE_NEWER_VERSION)\\b",
+                    "name": "storage.type.usp"
+                },
+                {
+                    "comment": "Crestron File Functions Flags",
+                    "match": "(?i)\\b(_O_RDONLY|_O_WRONLY|_O_RDWR|_O_APPEND|_O_CREAT|_O_TRUNC|_O_EXCL|_O_TEXT|_O_BINARY)\\b",
+                    "name": "storage.type.usp"
+                },
+                {
+                    "comment": "Crestron File Info Structure",
+                    "match": "(?i)\\b(file_info|\\.Name|\\.iAttributes|\\.iTime|\\.iDate|\\.lSize)\\b",
+                    "name": "storage.type.usp"
+                },
+                {
                     "comment": "Crestron Math Functions",
-                    "match": "(?i)\\b(abs|max|min|muldiv|smax|smin)\\b",
+                    "match": "(?i)\\b(abs|max|min|muldiv|smax|smin|smuldiv)\\b",
                     "name": "support.function.usp"
                 },
                 {
                     "comment": "Crestron Ramp Functions",
-                    "match": "(?i)\\b(CompareRampsByAttribute|CompareRampsByID|CreateRamp|GetRampInfo|InitializeRampInfo|InitializeRampInfoArray|IsRamping|ramp_info|StopRamp)\\b",
+                    "match": "(?i)\\b(CompareRampsByAttribute|CompareRampsByID|CreateRamp|GetRampInfo|InitializeRampInfo|InitializeRampInfoArray|IsRamping|StopRamp)\\b",
                     "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron Ramp Functions Error Codes",
+                    "match": "(?i)\\b(RAMP_BAD_POINTER|RAMP_BOUNDS|RAMP_DIFFERENT_RAMP|RAMP_ILLEGAL_BASE_VALUE|RAMP_ILLEGAL_ISABSOLUTE|RAMP_ILLEGAL_TARGET_VALUE|RAMP_INVALID|RAMP_NO_CREATE|RAMP_NO_RAMP|RAMP_NO_RAMP_PRESENT|RAMP_NO_SIGNAL|RAMP_RAMP_PRESENT|RAMP_SAME_RAMP|RAMP_SUCCESS)\\b",
+                    "name": "storage.type.usp"
+                },
+                {
+                    "comment": "Crestron Ramp Info Structure",
+                    "match": "(?i)\\b(ramp_info|SIGNAL_DEFAULT_VALUE|\\.rampBaseTime|\\.rampBaseValue|\\.rampIdentifier|\\.rampIsAbsolute|\\.rampIsExpired|\\.rampIsRunnable|\\.rampIsSigned|\\.rampLowerBound|\\.rampTargetValue|\\.rampTransitionTime|\\.rampUpperBound)\\b",
+                    "name": "storage.type.usp"
                 },
                 {
                     "comment": "Crestron Random Number Functions",
@@ -324,7 +379,7 @@
                 },
                 {
                     "comment": "Crestron String Functions",
-                    "match": "(?i)\\b(makestring|print|trace|ClearBuffer|CompareStrings|CompareStringsNoCase|find|FindNoCase|gather|GatherByLength|GetC|left|len|lower|mid|remove|RemoveByLength|ResizeString|ReverseFind|ReverseFindNoCase|right|SetString|upper)\\b",
+                    "match": "(?i)\\b(makestring|print|trace|ClearBuffer|CompareStrings|CompareStringsNoCase|find|FindNoCase|gather|GatherByLength|GetC|left|len|lower|mid|remove|RemoveByLength|ResizeString|ReverseFind|ReverseFindNoCase|right|SetString|upper|GatherAsync|GatherAsyncByLength|GatherByLengthWithDest|GatherEventArgs|GatherEventHandler|GatherWithDest|RearmGatherAsync|RemoveGatherAsync)\\b",
                     "name": "support.function.usp"
                 },
                 {
@@ -334,7 +389,7 @@
                 },
                 {
                     "comment": "Crestron System Initialization Functions",
-                    "match": "(?i)\\b(GenerateUserError|GenerateUserNotice|GenerateUserWarning|GetCIP|GetCrestnet|GetModelNumber|GetProgramNumber|GetSeries|GetSlot|GetSymbolInstanceName|GetSymbolReferenceName|IsSignalDefined|MakeProgramFilename|SendCresnetPacket|SendPacketToCPU|SetCIP|SetCresnet|SetSlot|RegisterDelegate|RegisterEvent)\\b",
+                    "match": "(?i)\\b(GenerateUserError|GenerateUserNotice|GenerateUserWarning|GetCIP|GetCrestnet|GetModelNumber|GetProgramNumber|GetSeries|GetSlot|GetSymbolInstanceName|GetSymbolReferenceName|IsSignalDefined|IsParameterDefined|MakeProgramFilename|SendCresnetPacket|SendPacketToCPU|SetCIP|SetCresnet|SetSlot|RegisterDelegate|UnRegisterDelegate|RegisterEvent)\\b",
                     "name": "support.function.usp"
                 },
                 {
@@ -346,6 +401,26 @@
                     "comment": "Crestron Wait Functions",
                     "match": "(?i)\\b(CancelAllWait|CancelWait|PauseAllWait|PauseWait|ResumeAllWait|ResumeWait|RetimeWait|wait)\\b",
                     "name": "support.function.wait.usp"
+                },
+                {
+                    "comment": "Crestron Event/Mutex Functions (3-Series)",
+                    "match": "(?i)\\b(CEvent\\.Close|CEvent\\.Reset|CEvent\\.Set|CEvent\\.Wait|IsNull|CMutex\\.WaitForMutex|CMutex\\.ReleaseMutex|CMutex\\.Close|CEvent|CMutex)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron X-Gen Functions",
+                    "match": "(?i)\\b(SetRStackSize|SetDStackSize)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron Other Operands",
+                    "match": "(?i)\\b(MOD|UMOD)\\b",
+                    "name": "storage.type.usp"
+                },
+                {
+                    "comment": "Crestron Digital Signal Value",
+                    "match": "(?i)\\b(OFF|ON)\\b",
+                    "name": "storage.type.usp"
                 }
             ]
         },
