@@ -98,6 +98,18 @@ export function activate(context: vscode.ExtensionContext) {
         processSimpl("\\target series3");
     });
 
+    let series4_compile = vscode.commands.registerCommand('extension.simplCC_Series4', () => {
+        processSimpl("\\target series4");
+    });
+
+    let series3and4_compile = vscode.commands.registerCommand('extension.simplCC_Series3and4', () => {
+        processSimpl("\\target series3 series4");
+    });
+
+    let series2and3and4_compile = vscode.commands.registerCommand('extension.simplCC_Series2and3and4', () => {
+        processSimpl("\\target series2 series3 series4");
+    });
+
     let series2and3_compile = vscode.commands.registerCommand('extension.simplCC_Series2and3', () => {
         processSimpl("\\target series2 series3");
     });

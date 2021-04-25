@@ -1,9 +1,7 @@
 {
-    "fileTypes": [
-        "usp"
-    ],
-    "foldingStartMarker": "(?x)\n\t\t \/\\*\\*(?!\\*)\n\t\t|^(?![^{]*?\/\/|[^{]*?\/\\*(?!.*?\\*\/.*?\\{)).*?\\{\\s*($|\/\/|\/\\*(?!.*?\\*\/.*\\S))\n\t",
-    "foldingStopMarker": "(?<!\\*)\\*\\*\/|^\\s*\\}",
+    "fileTypes": ["usp", "usl"],
+    "foldingStartMarker": "(?x)\n\t\t /\\*\\*(?!\\*)\n\t\t|^(?![^{]*?//|[^{]*?/\\*(?!.*?\\*/.*?\\{)).*?\\{\\s*($|//|/\\*(?!.*?\\*/.*\\S))\n\t",
+    "foldingStopMarker": "(?<!\\*)\\*\\*/|^\\s*\\}",
     "keyEquivalent": "^~U",
     "name": "Crestron",
     "patterns": [
@@ -85,7 +83,7 @@
                 }
             },
             "comment": "preprocessor definitions with values",
-            "end": "(?=(?:\/\/|\/\\*))|$",
+            "end": "(?=(?://|/\\*))|$",
             "name": "meta.preprocessor.macro.usp",
             "patterns": [
                 {
@@ -142,21 +140,21 @@
                             "name": "comment"
                         }
                     },
-                    "match": "^\/\\* =(\\s*.*?)\\s*= \\*\/$\\n?",
+                    "match": "^/\\* =(\\s*.*?)\\s*= \\*/$\\n?",
                     "name": "comment.block.usp"
                 },
                 {
-                    "begin": "\/\\*",
+                    "begin": "/\\*",
                     "captures": [
                         {
                             "name": "comment"
                         }
                     ],
-                    "end": "\\*\/",
+                    "end": "\\*/",
                     "name": "comment.block"
                 },
                 {
-                    "match": "\\*\/.*\\n",
+                    "match": "\\*/.*\\n",
                     "name": "comment"
                 },
                 {
@@ -165,11 +163,11 @@
                             "name": "comment"
                         }
                     },
-                    "match": "^\/\/ =(\\s*.*?)\\s*=\\s*$\\n?",
+                    "match": "^// =(\\s*.*?)\\s*=\\s*$\\n?",
                     "name": "comment.line"
                 },
                 {
-                    "begin": "\/\/",
+                    "begin": "//",
                     "beginCaptures": [
                         {
                             "name": "comment"
@@ -190,7 +188,7 @@
             "patterns": [
                 {
                     "comment": "Crestron Compiler Directives",
-                    "match": "(?i)(#\\b(analog_serial_expand|category|crestron_library|user_simplsharp_library|includepath|default_nonvolatile|default_volatile|define_constant|digital_expand|enable_dynamic|enable_stack_checking|enable_trace|encoding_ascii|encoding_utf16|encoding_inherit_from_parent|encoding_inherit_from_program|help|help_begin|help_end|help_pdf_file|hint|if_defined|if_not_defined|endif|if_series2|if_series3|large_stack|max_internal_buffer_size|output_shift|print_to_trace|symbol_name|user_library)\\b)",
+                    "match": "(?i)(#\\b(analog_serial_expand|category|crestron_library|user_simplsharp_library|includepath|default_nonvolatile|default_volatile|define_constant|digital_expand|enable_dynamic|enable_stack_checking|enable_trace|encoding_ascii|encoding_utf16|encoding_inherit_from_parent|encoding_inherit_from_program|help|help_begin|help_end|help_pdf_file|hint|if_defined|if_not_defined|endif|if_series2|if_series3|if_series4|large_stack|max_internal_buffer_size|output_shift|print_to_trace|symbol_name|user_library)\\b)",
                     "name": "keyword.other.preprocessor.usp"
                 },
                 {
@@ -204,7 +202,7 @@
                     "name": "keyword.other.preprocessor.usp"
                 },
                 {
-                    "comment": "Crestron I\/O Declarations",
+                    "comment": "Crestron I/O Declarations",
                     "match": "(?i)\\b(analog_input|analog_output|buffer_input|digital_input|digital_output|integer_parameter|long_integer_parameter|nonvolatile|signed_integer_parameter|signed_long_integer_parameter|string_input|string_output|string_parameter|structure|volatile)\\b",
                     "name": "keyword.other.preprocessor.usp"
                 },
@@ -259,7 +257,7 @@
                     "name": "support.function.usp"
                 },
                 {
-                    "comment": "Crestron Bit\/Byte Functions",
+                    "comment": "Crestron Bit/Byte Functions",
                     "match": "(?i)\\b(bit|byte|high|highWord|low|LowerChar|LowWord|RotateLeft|RotateLeftLong|RotateRight|RotateRightLong|SetByte|UpperChar)\\b",
                     "name": "support.function.usp"
                 },
@@ -324,7 +322,7 @@
                     "name": "support.function.usp"
                 },
                 {
-                    "comment": "Crestron Time\/Date Functions",
+                    "comment": "Crestron Time/Date Functions",
                     "match": "(?i)\\b(date|day|FileDate|FileDay|FileGetDateNum|FileGetDayOfWeekNum|FileGetHourNum|FileGetMinutesNum|FileGetMonthNum|FileGetSecondsNum|FileGetYearNum|FileMonth|FileTime|GetDateNum|GetDayOfWeekNum|GetDST|GetGMTOffset|GetHourNum|GetHSeconds|GetMinutesNum|GetMonthNum|GetSecondsNum|GetTicks|GetYearNum|month|SetClock|SetDate|SetGMTOffset|time)\\b",
                     "name": "support.function.usp"
                 },

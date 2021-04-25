@@ -1,8 +1,5 @@
 {
-    "fileTypes": [
-        "usp",
-        "usl"
-    ],
+    "fileTypes": ["usp", "usl"],
     "name": "Crestron",
     "patterns": [
         {
@@ -71,7 +68,6 @@
                 }
             },
             "name": "string.quoted.single.usp"
-
         },
         {
             "begin": "(?i)\\s*(function|string_function|long_integer_function|signed_integer_function|signed_long_integer_function|integer_function|push|change|release|event|eventhandler|callback function|callback signed_integer_function|callback signed_long_integer_function|callback integer_function|callback long_integer_function|callback string_function)\\s+(\\b[a-z0-9_\\-\\$]*)",
@@ -99,25 +95,25 @@
             "comment": "Function use highlighting",
             "match": "([_$[:alpha:]][_$[:alnum:]]*)\\((.{0,})\\)",
             "captures": {
-                "1":{ "name": "entity.name.function.usp"}
+                "1": { "name": "entity.name.function.usp" }
             }
         },
         {
             "comment": "Define Constants",
-            "match":"(?i)(#define_constant)(.+)\\s.+\\s",
+            "match": "(?i)(#define_constant)(.+)\\s.+\\s",
             "captures": {
-                "1": { "name": "keyword.other.preprocessor.usp"},
-                "2": { "name": "variable.other.usp"}
+                "1": { "name": "keyword.other.preprocessor.usp" },
+                "2": { "name": "variable.other.usp" }
             }
         },
         {
             "begin": "(?i)\\b(digital_input|analog_input|analog_output|buffer_input|digital_output|string_input|string_output)\\b",
             "beginCaptures": {
-               "1": {"name": "keyword.other.preprocessor.usp"}
+                "1": { "name": "keyword.other.preprocessor.usp" }
             },
             "end": "(;)",
             "endCaptures": {
-                "1": {"name": "punctuation.terminator.statement.usp"}
+                "1": { "name": "punctuation.terminator.statement.usp" }
             },
             "name": "entity.name.function.usp",
             "patterns": [
@@ -133,7 +129,6 @@
                 }
             ]
         }
-
     ],
     "repository": {
         "angle_brackets": {
@@ -157,21 +152,21 @@
                             "name": "comment"
                         }
                     },
-                    "match": "^\/\\* =(\\s*.*?)\\s*= \\*\/$\\n?",
+                    "match": "^/\\* =(\\s*.*?)\\s*= \\*/$\\n?",
                     "name": "comment.block.usp"
                 },
                 {
-                    "begin": "\/\\*",
+                    "begin": "/\\*",
                     "captures": [
                         {
                             "name": "comment"
                         }
                     ],
-                    "end": "\\*\/",
+                    "end": "\\*/",
                     "name": "comment.block"
                 },
                 {
-                    "match": "\\*\/.*\\n",
+                    "match": "\\*/.*\\n",
                     "name": "comment"
                 },
                 {
@@ -180,11 +175,11 @@
                             "name": "comment"
                         }
                     },
-                    "match": "^\/\/ =(\\s*.*?)\\s*=\\s*$\\n?",
+                    "match": "^// =(\\s*.*?)\\s*=\\s*$\\n?",
                     "name": "comment.line"
                 },
                 {
-                    "begin": "\/\/",
+                    "begin": "//",
                     "beginCaptures": [
                         {
                             "name": "comment"
@@ -205,7 +200,7 @@
             "patterns": [
                 {
                     "comment": "Crestron Compiler Directives",
-                    "match": "(?i)(#\\b(analog_serial_expand|category|crestron_library|user_simplsharp_library|includepath|default_nonvolatile|default_volatile|digital_expand|enable_dynamic|enable_stack_checking|enable_trace|encoding_ascii|encoding_utf16|encoding_inherit_from_parent|encoding_inherit_from_program|help|help_pdf_file|hint|if_defined|if_not_defined|endif|if_series2|if_series3|large_stack|max_internal_buffer_size|output_shift|print_to_trace|symbol_name|user_library|crestron_simplsharp_library|dynamic_initialsize)\\b)",
+                    "match": "(?i)(#\\b(analog_serial_expand|category|crestron_library|user_simplsharp_library|includepath|default_nonvolatile|default_volatile|digital_expand|enable_dynamic|enable_stack_checking|enable_trace|encoding_ascii|encoding_utf16|encoding_inherit_from_parent|encoding_inherit_from_program|help|help_pdf_file|hint|if_defined|if_not_defined|endif|if_series2|if_series3|if_series4|large_stack|max_internal_buffer_size|output_shift|print_to_trace|symbol_name|user_library|crestron_simplsharp_library|dynamic_initialsize)\\b)",
                     "name": "keyword.other.preprocessor.usp"
                 },
                 {
@@ -224,7 +219,7 @@
                     "name": "keyword.other.preprocessor.usp"
                 },
                 {
-                    "comment": "Crestron I\/O Declarations",
+                    "comment": "Crestron I/O Declarations",
                     "match": "(?i)\\b(integer_parameter|long_integer_parameter|nonvolatile|signed_integer_parameter|signed_long_integer_parameter|string_parameter|volatile)\\b",
                     "name": "keyword.other.preprocessor.usp"
                 },
@@ -294,7 +289,7 @@
                     "name": "support.function.usp"
                 },
                 {
-                    "comment": "Crestron Bit\/Byte Functions",
+                    "comment": "Crestron Bit/Byte Functions",
                     "match": "(?i)\\b(bit|byte|high|highWord|low|LowerChar|LowWord|RotateLeft|RotateLeftLong|RotateRight|RotateRightLong|SetByte|UpperChar)\\b",
                     "name": "support.function.usp"
                 },
@@ -394,7 +389,7 @@
                     "name": "support.function.usp"
                 },
                 {
-                    "comment": "Crestron Time\/Date Functions",
+                    "comment": "Crestron Time/Date Functions",
                     "match": "(?i)\\b(date|day|FileDate|FileDay|FileGetDateNum|FileGetDayOfWeekNum|FileGetHourNum|FileGetMinutesNum|FileGetMonthNum|FileGetSecondsNum|FileGetYearNum|FileMonth|FileTime|GetDateNum|GetDayOfWeekNum|GetDST|GetGMTOffset|GetHourNum|GetHSeconds|GetMinutesNum|GetMonthNum|GetSecondsNum|GetTicks|GetYearNum|month|SetClock|SetDate|SetGMTOffset|time)\\b",
                     "name": "support.function.usp"
                 },

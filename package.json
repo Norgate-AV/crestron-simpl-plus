@@ -2,7 +2,7 @@
     "name": "crestron-simpl-plus",
     "displayName": "Crestron Simpl+",
     "description": "Extension for Crestron SIMPL+. Includes syntax highlighting and compiler access.",
-    "version": "1.3.1",
+    "version": "1.3.2",
     "publisher": "mwgustin",
     "icon": "simpl_plus_icon.png",
     "repository": {
@@ -17,6 +17,9 @@
     ],
     "activationEvents": [
         "onCommand:extension.simplCC_Series3",
+        "onCommand:extension.simplCC_Series4",
+        "onCommand:extension.simplCC_Series3and4",
+        "onCommand:extension.simplCC_Series2and3and4",
         "onCommand:extension.simplCC_Series2and3",
         "onCommand:extension.simplCC_Series3All",
         "onCommand:extension.simpl_help",
@@ -29,6 +32,18 @@
             {
                 "command": "extension.simplCC_Series3",
                 "title": "Simpl+ Series3 Compile Current File"
+            },
+            {
+                "command": "extension.simplCC_Series4",
+                "title": "Simpl+ Series4 Compile Current File"
+            },
+            {
+                "command": "extension.simplCC_Series3and4",
+                "title": "Simpl+ Series3 and Series4 Compile Current File"
+            },
+            {
+                "command": "extension.simplCC_Series2and3and4",
+                "title": "Simpl+ Series2, Series3, and Series4 Compile Current File"
             },
             {
                 "command": "extension.simplCC_Series2and3",
@@ -83,6 +98,21 @@
                 {
                     "when": "resourceLangId == simpl+",
                     "command": "extension.simplCC_Series3",
+                    "group": "navigation"
+                },
+                {
+                    "when": "resourceLangId == simpl+",
+                    "command": "extension.simplCC_Series4",
+                    "group": "navigation"
+                },
+                {
+                    "when": "resourceLangId == simpl+",
+                    "command": "extension.simplCC_Series3and4",
+                    "group": "navigation"
+                },
+                {
+                    "when": "resourceLangId == simpl+",
+                    "command": "extension.simplCC_Series2and3and4",
                     "group": "navigation"
                 },
                 {

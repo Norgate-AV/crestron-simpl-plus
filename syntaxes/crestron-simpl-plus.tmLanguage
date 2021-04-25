@@ -5,6 +5,7 @@
 	<key>fileTypes</key>
 	<array>
 		<string>usp</string>
+        <string>usl</string>
 	</array>
 	<key>foldingStartMarker</key>
 	<string>(?x)
@@ -317,7 +318,7 @@
 					<key>comment</key>
 					<string>Crestron Compiler Directives</string>
 					<key>match</key>
-					<string>(?i)(#\b(analog_serial_expand|category|crestron_library|user_simplsharp_library|includepath|default_nonvolatile|default_volatile|define_constant|digital_expand|enable_dynamic|enable_stack_checking|enable_trace|encoding_ascii|encoding_utf16|encoding_inherit_from_parent|encoding_inherit_from_program|help|help_begin|help_end|help_pdf_file|hint|if_defined|if_not_defined|endif|if_series2|if_series3|large_stack|max_internal_buffer_size|output_shift|print_to_trace|symbol_name|user_library)\b)</string>
+					<string>(?i)(#\b(analog_serial_expand|category|crestron_library|user_simplsharp_library|includepath|default_nonvolatile|default_volatile|define_constant|digital_expand|enable_dynamic|enable_stack_checking|enable_trace|encoding_ascii|encoding_utf16|encoding_inherit_from_parent|encoding_inherit_from_program|help|help_begin|help_end|help_pdf_file|hint|if_defined|if_not_defined|endif|if_series2|if_series3|if_series4|large_stack|max_internal_buffer_size|output_shift|print_to_trace|symbol_name|user_library)\b)</string>
 					<key>name</key>
 					<string>keyword.other.preprocessor.usp</string>
 				</dict>
