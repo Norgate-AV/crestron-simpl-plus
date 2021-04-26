@@ -170,6 +170,9 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     context.subscriptions.push(series3_compile);
+    context.subscriptions.push(series4_compile);
+    context.subscriptions.push(series3and4_compile);
+    context.subscriptions.push(series2and3and4_compile);
     context.subscriptions.push(series2and3_compile);
     context.subscriptions.push(series3_compileAll);
     context.subscriptions.push(help_command);
