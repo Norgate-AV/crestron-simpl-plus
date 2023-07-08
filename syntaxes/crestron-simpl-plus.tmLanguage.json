@@ -200,7 +200,7 @@
             "patterns": [
                 {
                     "comment": "Crestron Compiler Directives",
-                    "match": "(?i)(#\\b(analog_serial_expand|category|crestron_library|user_simplsharp_library|includepath|default_nonvolatile|default_volatile|digital_expand|enable_dynamic|enable_stack_checking|enable_trace|encoding_ascii|encoding_utf16|encoding_inherit_from_parent|encoding_inherit_from_program|help|help_pdf_file|hint|if_defined|if_not_defined|endif|if_series2|if_series3|if_series4|large_stack|max_internal_buffer_size|output_shift|print_to_trace|symbol_name|user_library|crestron_simplsharp_library|dynamic_initialsize)\\b)",
+                    "match": "(?i)(#\\b(analog_serial_expand|category|crestron_library|user_simplsharp_library|includepath|default_nonvolatile|default_volatile|digital_expand|enable_dynamic|enable_stack_checking|enable_trace|encoding_ascii|encoding_utf16|encoding_inherit_from_parent|encoding_inherit_from_program|help|help_pdf_file|hint|if_defined|if_not_defined|else|endif|if_series2|if_series3|if_series4|large_stack|max_internal_buffer_size|output_shift|print_to_trace|symbol_name|user_library|crestron_simplsharp_library|dynamic_initialsize)\\b)",
                     "name": "keyword.other.preprocessor.usp"
                 },
                 {
