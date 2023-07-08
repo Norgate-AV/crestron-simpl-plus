@@ -5,7 +5,7 @@ import * as assert from 'assert';
 // import { commands, Uri } from 'vscode';
 import { join, basename, normalize, dirname } from 'path';
 import * as fs from 'fs';
-import * as svg from "../visualizer";
+import * as svg from "../../visualizer";
 
 
 function assertUnchangedTokens(testFixurePath: string, done: any) {
@@ -41,8 +41,8 @@ function assertUnchangedTokens(testFixurePath: string, done: any) {
     }
 }
 
-   
-	
+
+
 suite('Visualizer', () => {
 	let extensionsFolder = normalize(join(__dirname, '../../'));
 	let extensions = fs.readdirSync(extensionsFolder);
