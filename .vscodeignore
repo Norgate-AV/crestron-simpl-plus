@@ -8,3 +8,15 @@ vsc-extension-quickstart.md
 **/.eslintrc.json
 **/*.map
 **/*.ts
+.history/**
+.all-contributorsrc
+.changelogrc.json
+.commitlintrc.json
+.czrc
+.editorconfig
+.lintstagedrc.json
+.nvmrc
+.prettierrc.json
+.prettierignore
+.husky/**
+.github/**
