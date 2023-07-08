@@ -5,7 +5,7 @@
     "version": "1.3.3",
     "publisher": "Norgate AV Solutions Ltd",
     "license": "MIT",
-    "icon": "simpl_plus_icon.png",
+    "icon": "assets/img/simpl_plus_icon.png",
     "repository": {
         "type": "git",
         "url": "https://github.com/Norgate-AV-Solutions-Ltd/crestron-simpl-plus.git"
