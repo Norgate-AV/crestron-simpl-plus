@@ -1,6 +1,6 @@
-# crestron-simpl-plus README
+# crestron-simpl-plus
 
-VSCode Extension which adds syntax highlighting and provides commands in the command pallete for compiling.
+VSCode Extension which adds syntax highlighting and provides commands in the command palette for compiling.
 
 Note: To take advantage of the compiler operations, you must have the Crestron provided Simpl+ Compiler installed.
 
@@ -8,7 +8,7 @@ Note: To take advantage of the compiler operations, you must have the Crestron p
 
 Syntax highlighting. Compiler.
 
-TODO: code file-type icons, maybe better intellisense + autocompletes.
+TODO: code file-type icons, maybe better intellisense + autocompletion.
 
 This extension contributes the following commands:
 
