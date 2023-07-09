@@ -209,6 +209,7 @@
     },
     "scripts": {
         "vscode:prepublish": "yarn compile",
+        "precompile": "rimraf ./out",
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
         "pretest": "yarn compile && yarn lint",
@@ -245,6 +246,7 @@
         "lint-staged": "^13.2.2",
         "mocha": "^10.2.0",
         "prettier": "^2.8.4",
+        "rimraf": "^5.0.1",
         "size-limit": "^8.2.4",
         "typescript": "^5.1.6",
         "vsce": "^2.15.0"
