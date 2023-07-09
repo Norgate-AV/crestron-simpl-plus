@@ -7,29 +7,36 @@ import { join, basename, normalize, dirname } from "path";
 import * as fs from "fs";
 import * as svg from "../../visualizer";
 
-function assertUnchangedTokens(testFixurePath: string, done: any) {
-    let fileName = basename(testFixurePath);
+function assertUnchangedTokens(testFixturePath: string, done: any) {
+    let fileName = basename(testFixturePath);
+
     try {
-        let fixtureData = fs.readFileSync(testFixurePath).toString();
+        let fixtureData = fs.readFileSync(testFixturePath).toString();
         let parser = new svg.VisualizerParse();
+
         parser.fileText = fixtureData;
         parser.parseFileText();
+
         let viewer = new svg.SVGCreator(parser);
         let fixtureSVG = viewer.returnSVG();
 
         let resultsFolderPath = join(
-            dirname(dirname(testFixurePath)),
+            dirname(dirname(testFixturePath)),
             "visualizer-results",
         );
+
         if (!fs.existsSync(resultsFolderPath)) {
             fs.mkdirSync(resultsFolderPath);
         }
+
         let resultPath = join(
             resultsFolderPath,
             fileName.replace(".", "_") + ".html",
         );
+
         if (fs.existsSync(resultPath)) {
             let previousData = fs.readFileSync(resultPath).toString();
+
             try {
                 assert.deepStrictEqual(fixtureSVG, previousData);
             } catch (e) {
@@ -47,6 +54,7 @@ function assertUnchangedTokens(testFixurePath: string, done: any) {
 suite("Visualizer", () => {
     let extensionsFolder = normalize(join(__dirname, "../../"));
     let extensions = fs.readdirSync(extensionsFolder);
+
     extensions.forEach((extension) => {
         let extensionVisualizerFixturePath = join(
             extensionsFolder,
@@ -54,8 +62,10 @@ suite("Visualizer", () => {
             "test",
             "visualizer-fixtures",
         );
+
         if (fs.existsSync(extensionVisualizerFixturePath)) {
             let fixturesFiles = fs.readdirSync(extensionVisualizerFixturePath);
+
             fixturesFiles.forEach((fixturesFile) => {
                 // define a test for each fixture
                 test(extension + "-" + fixturesFile, function (done) {

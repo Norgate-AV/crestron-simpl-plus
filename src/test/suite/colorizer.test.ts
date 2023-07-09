@@ -11,31 +11,35 @@ import { commands, Uri } from "vscode";
 import { join, basename, normalize, dirname } from "path";
 import * as fs from "fs";
 
-function assertUnchangedTokens(testFixurePath: string, done: any) {
-    let fileName = basename(testFixurePath);
+function assertUnchangedTokens(testFixturePath: string, done: any) {
+    let fileName = basename(testFixturePath);
 
     return commands
         .executeCommand(
             "_workbench.captureSyntaxTokens",
-            Uri.file(testFixurePath),
+            Uri.file(testFixturePath),
         )
         .then((data) => {
             try {
                 let resultsFolderPath = join(
-                    dirname(dirname(testFixurePath)),
+                    dirname(dirname(testFixturePath)),
                     "colorize-results",
                 );
+
                 if (!fs.existsSync(resultsFolderPath)) {
                     fs.mkdirSync(resultsFolderPath);
                 }
+
                 let resultPath = join(
                     resultsFolderPath,
                     fileName.replace(".", "_") + ".json",
                 );
+
                 if (fs.existsSync(resultPath)) {
                     let previousData = JSON.parse(
                         fs.readFileSync(resultPath).toString(),
                     );
+
                     try {
                         assert.deepEqual(data, previousData);
                     } catch (e) {
@@ -44,6 +48,7 @@ function assertUnchangedTokens(testFixurePath: string, done: any) {
                             JSON.stringify(data, null, "\t"),
                             { flag: "w" },
                         );
+
                         if (
                             Array.isArray(data) &&
                             Array.isArray(previousData) &&
@@ -52,6 +57,7 @@ function assertUnchangedTokens(testFixurePath: string, done: any) {
                             for (let i = 0; i < data.length; i++) {
                                 let d = data[i];
                                 let p = previousData[i];
+
                                 if (d.c !== p.c || hasThemeChange(d.r, p.r)) {
                                     throw e;
                                 }
@@ -76,17 +82,20 @@ function assertUnchangedTokens(testFixurePath: string, done: any) {
 
 function hasThemeChange(d: any, p: any): boolean {
     let keys = Object.keys(d);
+
     for (let key of keys) {
         if (d[key] !== p[key]) {
             return true;
         }
     }
+
     return false;
 }
 
 suite("colorization", () => {
     let extensionsFolder = normalize(join(__dirname, "../../"));
     let extensions = fs.readdirSync(extensionsFolder);
+
     extensions.forEach((extension) => {
         let extensionColorizeFixturePath = join(
             extensionsFolder,
@@ -94,8 +103,10 @@ suite("colorization", () => {
             "test",
             "colorize-fixtures",
         );
+
         if (fs.existsSync(extensionColorizeFixturePath)) {
             let fixturesFiles = fs.readdirSync(extensionColorizeFixturePath);
+
             fixturesFiles.forEach((fixturesFile) => {
                 // define a test for each fixture
                 test(extension + "-" + fixturesFile, function (done) {
